@@ -1,0 +1,29 @@
+@import "~@angular/material/theming";
+
+::ng-deep .custom-dialog {
+  overflow-y: auto;
+  border-radius: 1%;
+  background-color: mat-color($mat-red, 300);
+}
+
+::ng-deep mat-dialog-container {
+  border-radius: 1%;
+  background-color: transparent !important;
+}
+
+.confirmDeleted {
+  color: mat-color($mat-red, 500);
+  font-weight: bold;
+}
+
+h1 {
+  color: mat-color($mat-red, 50);
+}
+
+p {
+  color: mat-color($mat-red, 50);
+}
+
+.buttonClose {
+  color: mat-color($mat-brown, 50);
+}
