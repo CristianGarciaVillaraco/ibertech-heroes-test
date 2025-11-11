@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Hero } from '../../interfaces/hero.interface';
 import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 
