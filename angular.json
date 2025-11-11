@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "heroes:build:production"
+              "buildTarget": "heroes:build:production"
             },
             "development": {
-              "browserTarget": "heroes:build:development"
+              "buildTarget": "heroes:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "heroes:build"
+            "buildTarget": "heroes:build"
           }
         },
         "test": {
