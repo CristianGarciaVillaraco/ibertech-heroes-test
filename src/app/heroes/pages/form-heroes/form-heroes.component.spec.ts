@@ -1,5 +1,5 @@
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormHeroesComponent } from './form-heroes.component';
@@ -8,6 +8,7 @@ import { ImagePipe } from '../../pipes/image.pipe';
 import { HeroesService } from '../../services/heroes.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('FormHeroesComponent', () => {
   let component: FormHeroesComponent;
@@ -20,16 +21,14 @@ describe('FormHeroesComponent', () => {
       'addHero',
     ]);
     await TestBed.configureTestingModule({
-      declarations: [FormHeroesComponent, ImagePipe],
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
+    declarations: [FormHeroesComponent, ImagePipe],
+    imports: [RouterTestingModule,
         MatSnackBarModule,
         MatDialogModule,
         ReactiveFormsModule,
-        FormsModule,
-      ],
-    }).compileComponents();
+        FormsModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
   FormHeroesComponent.prototype.ngOnInit = () => {};
   beforeEach(() => {

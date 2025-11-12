@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import {
@@ -13,6 +13,7 @@ import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -26,10 +27,10 @@ describe('SearchComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      declarations: [SearchComponent],
-      imports: [HttpClientTestingModule, MatAutocompleteModule],
-      providers: [{ provide: HeroesService, useValue: heroesSpy }],
-    }).compileComponents();
+    declarations: [SearchComponent],
+    imports: [MatAutocompleteModule],
+    providers: [{ provide: HeroesService, useValue: heroesSpy }, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+}).compileComponents();
   });
 
   beforeEach(() => {

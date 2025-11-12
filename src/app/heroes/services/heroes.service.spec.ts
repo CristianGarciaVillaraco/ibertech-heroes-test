@@ -1,8 +1,9 @@
 import { TestBed, async } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { HeroesService } from './heroes.service';
 import { allHeroes, batmanHeroInList, batmanHeroObject } from './heroesServiceTestsData';
 import { Hero, Publisher } from '../interfaces/hero.interface';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('ServicesService', () => {
   let httpTestingController: HttpTestingController;
@@ -11,8 +12,9 @@ describe('ServicesService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     httpTestingController = TestBed.get(HttpTestingController);
     service = TestBed.inject(HeroesService);

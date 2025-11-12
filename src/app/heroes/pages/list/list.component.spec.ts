@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
 import { of } from 'rxjs';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeroesService } from '../../services/heroes.service';
 import { allHeroes } from '../../services/heroesServiceTestsData';
 
@@ -15,11 +15,12 @@ describe('ListComponent', () => {
     heroesSpy = jasmine.createSpyObj<HeroesService>('HeroesService', ['getHeroes']);
 
     await TestBed.configureTestingModule({
-      imports: [ HttpClientModule ],
-      providers: [
+    imports: [],
+    providers: [
         { provide: HeroesService, useValue: heroesSpy },
-      ]
-    })
+        provideHttpClient(withInterceptorsFromDi()),
+    ]
+})
     .compileComponents();
   });
 
