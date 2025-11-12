@@ -1,6 +1,6 @@
 # Heroes
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 20.3.x.
 
 ## Development server
 
@@ -8,13 +8,14 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/heroes` directory.
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng test` to execute the unit tests.  
+Currently configured with Karma and Jasmine. (Consider migrating to Jest or Vitest for faster testing.)
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
+End-to-end testing is not included by default in Angular CLI v20.  
+You can add support using tools like [Cypress](https://www.cypress.io/) or [Playwright](https://playwright.dev/).

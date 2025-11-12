@@ -1,16 +1,14 @@
-@import "@angular/material/theming";
-
 img {
   width: 100%;
   height: 60vh;
   border-radius: 5px;
-};
+}
 
 mat-form-field {
   padding-bottom: 10px;
 }
 
-mat-error  {
-  color: mat-color($mat-red, 300);
+mat-error {
+  color: #e57373;
   font-size: 15px;
 }

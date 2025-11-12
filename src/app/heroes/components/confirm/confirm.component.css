@@ -1,9 +1,7 @@
-@import "@angular/material/theming";
-
 ::ng-deep .custom-dialog {
   overflow-y: auto;
   border-radius: 1%;
-  background-color: mat-color($mat-red, 300);
+  background-color: #e57373; /* Material Red 300 */
 }
 
 ::ng-deep mat-dialog-container {
@@ -12,18 +10,18 @@
 }
 
 .confirmDeleted {
-  color: mat-color($mat-red, 500);
+  color: #f44336; /* Material Red 500 */
   font-weight: bold;
 }
 
 h1 {
-  color: mat-color($mat-red, 50);
+  color: #ffebee; /* Material Red 50 */
 }
 
 p {
-  color: mat-color($mat-red, 50);
+  color: #ffebee; /* Material Red 50 */
 }
 
 .buttonClose {
-  color: mat-color($mat-brown, 50);
+  color: #efebe9; /* Material Brown 50 */
 }

@@ -1,0 +1,13 @@
+mat-card {
+  background-color: #e57373;
+  color: #ffebee;
+  height: 100%;
+}
+
+.readMore {
+  color: #795548;
+}
+
+p {
+  word-wrap: break-word;
+}

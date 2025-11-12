@@ -1,7 +1,5 @@
-@import "@angular/material/theming";
-
 mat-option {
-  background-color: mat-color($mat-red, 300);
+  background-color: var(--mat-option-bg);
 }
 
 mat-divider {
@@ -9,7 +7,7 @@ mat-divider {
 }
 
 h1 {
-  color: white
+  color: white;
 }
 
 h3 {

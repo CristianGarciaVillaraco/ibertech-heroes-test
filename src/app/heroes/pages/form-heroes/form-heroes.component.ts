@@ -10,11 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-    selector: 'app-form-heroes',
-    templateUrl: './form-heroes.component.html',
-    styleUrls: ['./form-heroes.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    standalone: false
+  selector: 'app-form-heroes',
+  templateUrl: './form-heroes.component.html',
+  styleUrls: ['./form-heroes.component.css'],
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class FormHeroesComponent implements OnInit {
   showLoading: boolean = false;

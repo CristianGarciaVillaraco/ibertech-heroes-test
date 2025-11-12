@@ -1,15 +1,20 @@
 <h1>
-  {{ (hero.id) ? 'Editar' : 'Nuevo' }} Héroe
+  {{ hero.id ? "Editar" : "Nuevo" }} Héroe
   <small>{{ hero.superhero | titlecase }}</small>
 </h1>
 
-<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="40px" fxLayoutAlign="center">
+<div
+  fxLayout="row"
+  fxLayout.lt-lg="column"
+  fxLayoutGap="40px"
+  fxLayoutAlign="center"
+>
   <div fxFlex="50" fxLayout="column">
     <form (submit)="save()" [formGroup]="heroForm">
       <div fxLayout="row" fxLayoutGap="20" fxLayout.xs="colums">
         <mat-form-field fxFlex="100" fxLayout.xs="colums">
           <mat-label>Super Héroe</mat-label>
-          <input matInput type="text" formControlName="superhero">
+          <input matInput type="text" formControlName="superhero" />
           <mat-error *ngIf="heroForm.get('superhero')?.hasError('required')">
             Superhero es requerido
           </mat-error>
@@ -21,7 +26,11 @@
         <mat-form-field>
           <mat-label>Compañia</mat-label>
           <mat-select formControlName="publisher">
-            <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.desc}}</mat-option>
+            <mat-option
+              *ngFor="let publisher of publishers"
+              [value]="publisher.id"
+              >{{ publisher.desc }}</mat-option
+            >
           </mat-select>
           <mat-error *ngIf="heroForm.get('publisher')?.hasError('required')">
             Publisher es requerido
@@ -30,7 +39,7 @@
 
         <mat-form-field fxFlex="100">
           <mat-label>Alter Ego</mat-label>
-          <input matInput type="text" formControlName="alter_ego">
+          <input matInput type="text" formControlName="alter_ego" />
           <mat-error *ngIf="heroForm.get('alter_ego')?.hasError('required')">
             Alter ego es requerido
           </mat-error>
@@ -42,18 +51,28 @@
       <div fxLayout="column">
         <mat-form-field appearance="fill">
           <mat-label>Personajes</mat-label>
-          <mat-chip-list #chipListCharacters aria-label="Selección de personajes" formControlName="characters">
-            <mat-chip *ngFor="let character of heroForm.controls['characters'].value"
-              (removed)="remove(character, 'characters')">
+          <mat-chip-grid
+            #chipListCharacters
+            aria-label="Selección de personajes"
+            formControlName="characters"
+          >
+            <mat-chip
+              *ngFor="let character of heroForm.controls['characters'].value"
+              (removed)="remove(character, 'characters')"
+            >
               {{ character }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input placeholder="Nuevo personaje..." [matChipInputFor]="chipListCharacters"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
-              (matChipInputTokenEnd)="add($event, 'characters')">
-          </mat-chip-list>
+            <input
+              placeholder="Nuevo personaje..."
+              [matChipInputFor]="chipListCharacters"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="add($event, 'characters')"
+            />
+          </mat-chip-grid>
           <mat-error *ngIf="heroForm.get('characters')?.hasError('required')">
             Personajes es requerido
           </mat-error>
@@ -61,18 +80,28 @@
 
         <mat-form-field appearance="fill">
           <mat-label>Creadores</mat-label>
-          <mat-chip-list #chipListOriginators aria-label="Selección de creadores" formControlName="originators">
-            <mat-chip *ngFor="let originators of heroForm.controls['originators'].value"
-              (removed)="remove(originators, 'originators')">
+          <mat-chip-grid
+            #chipListOriginators
+            aria-label="Selección de creadores"
+            formControlName="originators"
+          >
+            <mat-chip
+              *ngFor="let originators of heroForm.controls['originators'].value"
+              (removed)="remove(originators, 'originators')"
+            >
               {{ originators }}
               <button matChipRemove>
                 <mat-icon>cancel</mat-icon>
               </button>
             </mat-chip>
-            <input placeholder="Nuevo creador..." [matChipInputFor]="chipListOriginators"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
-              (matChipInputTokenEnd)="add($event, 'originators')">
-          </mat-chip-list>
+            <input
+              placeholder="Nuevo creador..."
+              [matChipInputFor]="chipListOriginators"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="add($event, 'originators')"
+            />
+          </mat-chip-grid>
           <mat-error *ngIf="heroForm.get('originators')?.hasError('required')">
             Creadores es requerido
           </mat-error>
@@ -80,7 +109,11 @@
 
         <mat-form-field>
           <mat-label>Descripción</mat-label>
-          <textarea cdkTextareaAutosize matInput formControlName="description"></textarea>
+          <textarea
+            cdkTextareaAutosize
+            matInput
+            formControlName="description"
+          ></textarea>
           <mat-error *ngIf="heroForm.get('description')?.hasError('required')">
             Descripcion es requerido
           </mat-error>
@@ -88,49 +121,71 @@
 
         <mat-form-field>
           <mat-label>Primera aparición</mat-label>
-          <input matInput type="text" formControlName="first_appearance">
-          <mat-error *ngIf="heroForm.get('first_appearance')?.hasError('required')">
+          <input matInput type="text" formControlName="first_appearance" />
+          <mat-error
+            *ngIf="heroForm.get('first_appearance')?.hasError('required')"
+          >
             Primera aparición es requerido
           </mat-error>
-          <mat-error *ngIf="heroForm.get('first_appearance')?.hasError('maxlength')">
+          <mat-error
+            *ngIf="heroForm.get('first_appearance')?.hasError('maxlength')"
+          >
             Primera aparición es mayor a 30 caracteres
           </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="!hero.isAssetsImg">
           <mat-label>Foto url primera aparición</mat-label>
-          <input matInput type="url" formControlName="alt_img_fa">
+          <input matInput type="url" formControlName="alt_img_fa" />
           <mat-error *ngIf="heroForm.get('alt_img_fa')?.hasError('pattern')">
-            La url tiene que tener un formato especifico como por ej: https://mifoto.es/medi_a/23.jpg
+            La url tiene que tener un formato especifico como por ej:
+            https://mifoto.es/medi_a/23.jpg
           </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="!hero.isAssetsImg">
           <mat-label>Foto url</mat-label>
-          <input matInput type="url" formControlName="alt_img">
+          <input matInput type="url" formControlName="alt_img" />
           <mat-error *ngIf="heroForm.get('alt_img')?.hasError('pattern')">
-            La url tiene que tener un formato especifico como por ej: https://mifoto.es/medi_a/23.jpg
+            La url tiene que tener un formato especifico como por ej:
+            https://mifoto.es/medi_a/23.jpg
           </mat-error>
         </mat-form-field>
       </div>
-      <br>
+      <br />
 
       <div fxLayout>
-        <button type="submit" mat-raised-button color="primary" [disabled]="heroForm.invalid">
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="heroForm.invalid"
+        >
           <mat-icon>edit</mat-icon>
-          {{ (hero.id) ? 'Actualizar' : 'Crear' }}
+          {{ hero.id ? "Actualizar" : "Crear" }}
         </button>
 
         <span class="spacer"></span>
 
-        <button mat-raised-button type="button" [routerLink]="['list']" color="primary">
+        <button
+          mat-raised-button
+          type="button"
+          [routerLink]="['list']"
+          color="primary"
+        >
           <mat-icon>undo</mat-icon>
           Go back
         </button>
 
         <span class="spacer"></span>
 
-        <button *ngIf="hero.id" type="button" (click)="deletedHero()" mat-raised-button color="warn">
+        <button
+          *ngIf="hero.id"
+          type="button"
+          (click)="deletedHero()"
+          mat-raised-button
+          color="warn"
+        >
           <mat-icon>remove</mat-icon>
           Borrar
         </button>
@@ -139,10 +194,10 @@
   </div>
   <div fxFlex="50" fxLayout="row" fxLayoutGap="40px">
     <div fxFlex="45">
-      <img [src]="hero | image: false">
+      <img [src]="hero | image : false" />
     </div>
     <div fxFlex="45">
-      <img [src]="hero | image: true">
+      <img [src]="hero | image : true" />
     </div>
   </div>
 </div>

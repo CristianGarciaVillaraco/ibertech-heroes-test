@@ -1,7 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --mdc-theme-primary: #3f51b5;
+  --mdc-theme-secondary: #3f51b5;
+  --mdc-theme-background: #009688;
+  --mat-option-bg: #e57373;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .spacer {
   flex: 1 1 auto;

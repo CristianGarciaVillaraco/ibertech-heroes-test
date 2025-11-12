@@ -5,19 +5,19 @@ import { Hero, Publisher } from '../interfaces/hero.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HeroesService {
   private baseUrl: string = environment.baseUrl;
   publishers = [
     {
       id: 'DC Comics',
-      desc: 'DC - Comics'
+      desc: 'DC - Comics',
     },
     {
       id: 'Marvel Comics',
-      desc: 'Marver - Comics'
-    }
+      desc: 'Marver - Comics',
+    },
   ];
 
   result: Hero = {
@@ -27,57 +27,57 @@ export class HeroesService {
     first_appearance: '',
     characters: [],
     originators: [],
-    description: ''
+    description: '',
   };
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getHeroes(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/heroes`, { observe: 'response' })
-    .pipe(
-      retry(3),
-      catchError(this.handleError)
-    );
-  };
+    return this.http
+      .get<any>(`${this.baseUrl}/heroes`, { observe: 'response' })
+      .pipe(retry(3), catchError(this.handleError));
+  }
 
   getSuggestions(term: string): Observable<Hero[]> {
     let heroes: Hero[] = this.checkHeroesSessionStorage();
     let results: Hero[] = [];
-    heroes.find(hero => {
-      if(term && hero.superhero.toLowerCase().includes(term.toLowerCase())) {
+    heroes.find((hero) => {
+      if (term && hero.superhero.toLowerCase().includes(term.toLowerCase())) {
         results.push(hero);
       }
     });
-    return of(results)
-  };
+    return of(results);
+  }
 
-  addHero(hero: Hero): Observable<any> {  
-    return this.http.post<any>(`${this.baseUrl}/heroes`, hero, {
-      observe: 'response',
-    })
-    .pipe(catchError(this.handleError));
-  };
+  addHero(hero: Hero): Observable<any> {
+    return this.http
+      .post<any>(`${this.baseUrl}/heroes`, hero, {
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError));
+  }
 
   deleteHero(id: string): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/heroes/${id}`, {
-      observe: 'response',
-    })
-    .pipe(catchError(this.handleError));
-  };
+    return this.http
+      .delete<any>(`${this.baseUrl}/heroes/${id}`, {
+        observe: 'response',
+      })
+      .pipe(catchError(this.handleError));
+  }
 
-  getHeroForId(id: string): Hero {   
+  getHeroForId(id: string): Hero {
     let heroes: Hero[] = this.checkHeroesSessionStorage();
-    let validResult = heroes.find(hero => hero.id === id);
-    if(validResult) {
-      this.result = validResult;      
-    };
+    let validResult = heroes.find((hero) => hero.id === id);
+    if (validResult) {
+      this.result = validResult;
+    }
 
     return this.result;
-  };
+  }
 
   checkHeroesSessionStorage(): Hero[] {
     const heroesJson = sessionStorage.getItem('heroes');
-    return heroesJson !== null ? JSON.parse(heroesJson) : null;
-  };
+    return heroesJson !== null ? JSON.parse(heroesJson) : [];
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -89,4 +89,4 @@ export class HeroesService {
     }
     return throwError('Something bad happened; please try again later.');
   }
-};
+}

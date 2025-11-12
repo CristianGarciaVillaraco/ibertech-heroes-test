@@ -4,10 +4,10 @@ import { HeroDialogComponent } from '../hero-dialog/hero-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-hero-card',
-    templateUrl: './hero-card.component.html',
-    styleUrls: ['./hero-card.component.scss'],
-    standalone: false
+  selector: 'app-hero-card',
+  templateUrl: './hero-card.component.html',
+  styleUrls: ['./hero-card.component.css'],
+  standalone: false,
 })
 export class HeroesCardComponent {
   @Input() hero!: Hero;
