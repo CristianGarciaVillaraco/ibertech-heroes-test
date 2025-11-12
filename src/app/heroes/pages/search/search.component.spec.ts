@@ -1,12 +1,18 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatLegacyAutocompleteModule as MatAutocompleteModule, MatLegacyAutocompleteSelectedEvent as MatAutocompleteSelectedEvent } from '@angular/material/legacy-autocomplete';
 import { of } from 'rxjs';
-import { allHeroes, batmanHeroInList, batmanHeroObject } from '../../services/heroesServiceTestsData';
+import {
+  allHeroes,
+  batmanHeroInList,
+  batmanHeroObject,
+} from '../../services/heroesServiceTestsData';
 
 import { SearchComponent } from './search.component';
 import { HeroesService } from '../../services/heroes.service';
-
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -14,17 +20,15 @@ describe('SearchComponent', () => {
   let heroesSpy: jasmine.SpyObj<HeroesService>;
 
   beforeEach(async () => {
-    heroesSpy = jasmine.createSpyObj<HeroesService>('HeroesService', ['getSuggestions', 'getHeroForId']);
+    heroesSpy = jasmine.createSpyObj<HeroesService>('HeroesService', [
+      'getSuggestions',
+      'getHeroForId',
+    ]);
 
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
-      imports: [
-        HttpClientTestingModule,
-        MatAutocompleteModule
-      ],
-      providers: [
-        { provide: HeroesService, useValue: heroesSpy },
-      ]
+      imports: [HttpClientTestingModule, MatAutocompleteModule],
+      providers: [{ provide: HeroesService, useValue: heroesSpy }],
     }).compileComponents();
   });
 
@@ -49,8 +53,8 @@ describe('SearchComponent', () => {
   it('Should show the result hero or undefined', () => {
     const event: MatAutocompleteSelectedEvent = {
       option: {
-        value: 'batman'
-      }
+        value: 'batman',
+      },
     } as MatAutocompleteSelectedEvent;
     heroesSpy.getHeroForId.and.callFake(() => batmanHeroObject);
     component.selectedOption(event);
@@ -59,6 +63,5 @@ describe('SearchComponent', () => {
     event.option.value = '';
     component.selectedOption(event);
     expect(component.selectedHero).toBeUndefined();
-
   });
 });
