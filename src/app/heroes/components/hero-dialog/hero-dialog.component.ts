@@ -3,9 +3,10 @@ import { Hero } from '../../interfaces/hero.interface';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-hero-dialog',
-  templateUrl: './hero-dialog.component.html',
-  styleUrls: ['./hero-dialog.ccomponent.scss'],
+    selector: 'app-hero-dialog',
+    templateUrl: './hero-dialog.component.html',
+    styleUrls: ['./hero-dialog.ccomponent.scss'],
+    standalone: false
 })
 export class HeroDialogComponent {
   charactersMap = {
