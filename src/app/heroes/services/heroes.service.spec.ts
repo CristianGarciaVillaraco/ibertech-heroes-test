@@ -16,7 +16,7 @@ describe('ServicesService', () => {
     providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 });
 
-    httpTestingController = TestBed.get(HttpTestingController);
+    httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(HeroesService);
   });
 
