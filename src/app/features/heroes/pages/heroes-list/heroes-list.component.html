@@ -1,0 +1,18 @@
+<h1>Listado de Héroes</h1>
+<mat-divider></mat-divider>
+<br />
+
+<div
+  fxLayout="row wrap"
+  fxLayout.xs="column"
+  fxLayoutAling="center"
+  fxLayoutGap="10px grid"
+>
+  @for (hero of heroes; track hero.id) {
+  <div fxFlex="20" fxFlex.lg="15" fxFlex.sm="30">
+    <app-hero-card [hero]="hero"></app-hero-card>
+  </div>
+  } @empty {
+  <p>No hay héroes disponibles</p>
+  }
+</div>
