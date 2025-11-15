@@ -1,0 +1,27 @@
+::ng-deep .custom-dialog {
+  overflow-y: auto;
+  border-radius: 1%;
+  background-color: var(--mat-sys-error);
+}
+
+::ng-deep mat-dialog-container {
+  border-radius: 1%;
+  background-color: transparent !important;
+}
+
+.confirm-deleted {
+  color: var(--mat-sys-error);
+  font-weight: bold;
+}
+
+h1 {
+  color: var(--mat-sys-on-error);
+}
+
+p {
+  color: var(--mat-sys-on-error);
+}
+
+.button-close {
+  color: var(--mat-sys-on-error);
+}

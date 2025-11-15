@@ -1,0 +1,223 @@
+<h1>
+  {{ hero.id ? "Editar" : "Nuevo" }} Héroe
+  <small>{{ hero.superhero | titlecase }}</small>
+</h1>
+
+<div class="layout-container">
+  <div class="flex-50 flex-column">
+    <form (submit)="save()" [formGroup]="heroForm">
+      <div class="form-row">
+        <mat-form-field class="flex-100 responsive-column">
+          <mat-label>Super Héroe</mat-label>
+          <input matInput type="text" formControlName="superhero" />
+          @if (heroForm.get('superhero')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('superhero')?.hasError('required')) { El nombre
+            del superhéroe es obligatorio } @else if
+            (heroForm.get('superhero')?.hasError('maxlength')) { Máximo 20
+            caracteres permitidos }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Compañia</mat-label>
+          <mat-select formControlName="publisher">
+            @for (publisher of publishers; track publisher.id) {
+            <mat-option [value]="publisher.id">
+              {{ publisher.desc }}
+            </mat-option>
+            }
+          </mat-select>
+          @if (heroForm.get('publisher')?.invalid){
+          <mat-error>
+            @if (heroForm.get('publisher')?.hasError('required')) { Publisher es
+            requerido }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="flex-100">
+          <mat-label>Alter Ego</mat-label>
+          <input matInput type="text" formControlName="alter_ego" />
+          @if (heroForm.get('alter_ego')?.invalid){
+          <mat-error>
+            @if (heroForm.get('alter_ego')?.hasError('required')){ Alter ego es
+            requerido } @else if
+            (heroForm.get('alter_ego')?.hasError('maxlength')) { Alter ego es
+            mayor a 20 caracteres }
+          </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="flex-column">
+        <mat-form-field appearance="fill">
+          <mat-label>Personajes</mat-label>
+          <mat-chip-grid
+            #chipListCharacters
+            aria-label="Selección de personajes"
+            formControlName="characters"
+          >
+            @for (character of heroForm.controls['characters'].value; track
+            character) {
+            <mat-chip (removed)="remove(character, 'characters')">
+              {{ character }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            }
+
+            <input
+              placeholder="Nuevo personaje..."
+              [matChipInputFor]="chipListCharacters"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="add($event, 'characters')"
+            />
+          </mat-chip-grid>
+          @if (heroForm.get('characters')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('characters')?.hasError('required')) { Personajes
+            es requerido }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Creadores</mat-label>
+          <mat-chip-grid
+            #chipListOriginators
+            aria-label="Selección de creadores"
+            formControlName="originators"
+          >
+            @for (originator of heroForm.controls['originators'].value; track
+            originator) {
+            <mat-chip (removed)="remove(originator, 'originators')">
+              {{ originator }}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            } @empty {
+            <p>No hay originadores añadidos</p>
+            }
+
+            <input
+              placeholder="Nuevo creador..."
+              [matChipInputFor]="chipListOriginators"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="true"
+              (matChipInputTokenEnd)="add($event, 'originators')"
+            />
+          </mat-chip-grid>
+          @if (heroForm.get('originators')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('originators')?.hasError('required')) { Creadores
+            es requerido }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Descripción</mat-label>
+          <textarea
+            cdkTextareaAutosize
+            matInput
+            formControlName="description"
+          ></textarea>
+          @if (heroForm.get('description')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('description')?.hasError('required')) {
+            Descripcion es requerido }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Primera aparición</mat-label>
+          <input matInput type="text" formControlName="first_appearance" />
+          @if (heroForm.get('first_appearance')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('first_appearance')?.hasError('required')) {
+            Primera aparición es requerido } @else if
+            (heroForm.get('first_appearance')?.hasError('maxlength')) { Primera
+            aparición es mayor a 30 caracteres }
+          </mat-error>
+          }
+        </mat-form-field>
+        @if (!hero.isAssetsImg) {
+        <mat-form-field>
+          <mat-label>Foto url primera aparición</mat-label>
+          <input matInput type="url" formControlName="alt_img_fa" />
+          @if (heroForm.get('alt_img_fa')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('alt_img_fa')?.hasError('pattern')) { La url tiene
+            que tener un formato especifico como por ej:
+            https://mifoto.es/medi_a/23.jpg }
+          </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Foto url</mat-label>
+          <input matInput type="url" formControlName="alt_img" />
+          @if (heroForm.get('alt_img')?.invalid) {
+          <mat-error>
+            @if (heroForm.get('alt_img')?.hasError('pattern')) { La url tiene
+            que tener un formato especifico como por ej:
+            https://mifoto.es/medi_a/23.jpg }
+          </mat-error>
+          }
+        </mat-form-field>
+        }
+      </div>
+      <br />
+
+      <div class="flex-row">
+        <button
+          type="submit"
+          mat-raised-button
+          class="primary"
+          [disabled]="heroForm.invalid"
+        >
+          <mat-icon>edit</mat-icon>
+          {{ hero.id ? "Actualizar" : "Crear" }}
+        </button>
+
+        <span class="spacer"></span>
+
+        <button
+          mat-raised-button
+          type="button"
+          [routerLink]="['list']"
+          class="primary"
+        >
+          <mat-icon>undo</mat-icon>
+          Go back
+        </button>
+
+        <span class="spacer"></span>
+        @if (hero.id) {
+        <button
+          type="button"
+          (click)="deletedHero()"
+          mat-raised-button
+          class="btn-warn"
+        >
+          <mat-icon>remove</mat-icon>
+          Borrar
+        </button>
+        }
+      </div>
+    </form>
+  </div>
+  <div class="flex-50 flex-row gap-40">
+    <div class="flex-45">
+      <img [src]="hero | image : false" />
+    </div>
+    <div class="flex-45">
+      <img [src]="hero | image : true" />
+    </div>
+  </div>
+</div>
