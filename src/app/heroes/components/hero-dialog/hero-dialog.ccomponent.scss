@@ -1,0 +1,38 @@
+@import "~@angular/material/theming";
+
+#imgCover {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+::ng-deep .custom-dialog {
+  overflow-y: auto;
+  border-radius: 1%;
+  background-color: mat-color($mat-red, 300);
+}
+::ng-deep mat-dialog-container {
+  border-radius: 1%;
+  background-color: transparent !important;
+  max-height: 90vh;
+  max-width: 90vh;
+}
+.content {
+  color: mat-color($mat-red, 50);
+};
+
+#imgFA {
+  max-width: 30%;
+  height: auto;
+  display: block;
+  padding-left: 16px;
+}
+
+#removePaddingBottom {
+  padding-bottom: 0;
+}
+
+p {
+  padding-left: 16px;
+  word-wrap: break-word;
+}
