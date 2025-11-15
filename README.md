@@ -1,59 +1,100 @@
-# Heroes
+# Heroes App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+A simple Angular application for managing heroes. Originally built in 2022 as part of a company admission test, the project has since evolved into a modern learning and demonstration environment for Angular 20, standalone APIs, clean architecture, and updated UI practices.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📌 Project Purpose
+
+The main goals of this project are:
+
+- Showcase modern Angular 20 features (standalone components, updated router, signals, etc.)
+- Implement a clean and scalable application structure.
+- Demonstrate CRUD operations using a fictional heroes dataset.
+- Provide a playground for UI, routing, state management, and API integration.
+- Legacy version includes limited test coverage.
+
+---
+
+## 🛠 Tech Stack
+
+- Angular 20 (standalone components, Angular Material)
+- TypeScript
+- RxJS
+- Angular Material
+- Node.js (development server)
+- Git & GitHub for version control
+- CSS / SCSS / Tailwind (planned) for styling experiments
+
+---
+
+## 🚀 Usage
+
+### **Development Server**
+
+Start the development server with:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open your browser at: [http://localhost:4200](http://localhost:4200)
+The app will automatically reload when source files change.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### Build
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Compiled files are output to **dist/** and optimized for production.
 
-## Running unit tests
+### Testing
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- **Unit Tests**
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+- **End-to-End Test**
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+**Note: Angular CLI** no longer includes an e2e framework by default. You can integrate Cypress, Playwright, or another tool of your choice.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📚 Features
+
+- Hero listing with filtering.
+- Add new heroes via a form.
+- Delete heroes.
+- Search functionality (implemented as a filter).
+- Data persistence using session storage (to be replaced with a more robust solution in future versions).
+- JSON-based dataset for demo purposes.
+
+---
+
+## 🏷 Legacy Version
+
+A previous version of this project (from 2022) is preserved in the following branch:
+
+```bash
+legacy/2022-version
+```
+
+This branch contains the original **Angular 13 + Angular Material + SCSS** implementation used in the admission test. It remains available for historical reference.
+
+---
+
+## 🔮 Roadmap
+
+- Replace session storage with a more scalable solution (without a custom backend)
+- Improve styling (considering Tailwind CSS as an alternative to SCSS)
+- Complete unit and e2e test coverage
+- Enhance UI/UX with modern Angular Material components
+
+---
