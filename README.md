@@ -1,100 +1,20 @@
-# Heroes App
+# Heroes
 
-A simple Angular application for managing heroes. Originally built in 2022 as part of a company admission test, the project has since evolved into a modern learning and demonstration environment for Angular 20, standalone APIs, clean architecture, and updated UI practices.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
----
+## Development server
 
-## 📌 Project Purpose
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-The main goals of this project are:
+## Build
 
-- Showcase modern Angular 20 features (standalone components, updated router, signals, etc.)
-- Implement a clean and scalable application structure.
-- Demonstrate CRUD operations using a fictional heroes dataset.
-- Provide a playground for UI, routing, state management, and API integration.
-- Legacy version includes limited test coverage.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
----
+## Running unit tests
 
-## 🛠 Tech Stack
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-- Angular 20 (standalone components, Angular Material)
-- TypeScript
-- RxJS
-- Angular Material
-- Node.js (development server)
-- Git & GitHub for version control
-- CSS / SCSS / Tailwind (planned) for styling experiments
+## Running end-to-end tests
 
----
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## 🚀 Usage
-
-### **Development Server**
-
-Start the development server with:
-
-```bash
-ng serve
-```
-
-Open your browser at: [http://localhost:4200](http://localhost:4200)
-The app will automatically reload when source files change.
-
-### Build
-
-```bash
-ng build
-```
-
-Compiled files are output to **dist/** and optimized for production.
-
-### Testing
-
-- **Unit Tests**
-
-```bash
-ng test
-```
-
-- **End-to-End Test**
-
-```bash
-ng e2e
-```
-
-**Note: Angular CLI** no longer includes an e2e framework by default. You can integrate Cypress, Playwright, or another tool of your choice.
-
----
-
-## 📚 Features
-
-- Hero listing with filtering.
-- Add new heroes via a form.
-- Delete heroes.
-- Search functionality (implemented as a filter).
-- Data persistence using session storage (to be replaced with a more robust solution in future versions).
-- JSON-based dataset for demo purposes.
-
----
-
-## 🏷 Legacy Version
-
-A previous version of this project (from 2022) is preserved in the following branch:
-
-```bash
-legacy/2022-version
-```
-
-This branch contains the original **Angular 13 + Angular Material + SCSS** implementation used in the admission test. It remains available for historical reference.
-
----
-
-## 🔮 Roadmap
-
-- Replace session storage with a more scalable solution (without a custom backend)
-- Improve styling (considering Tailwind CSS as an alternative to SCSS)
-- Complete unit and e2e test coverage
-- Enhance UI/UX with modern Angular Material components
-
----
