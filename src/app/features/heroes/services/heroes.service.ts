@@ -2,14 +2,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, of, retry, throwError } from 'rxjs';
 import { Hero, Publisher } from '../interfaces/hero.interface';
-import { ConfigService } from '../../../core/services/config/config.service';
+import enviroment from '../../../config/config.json';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroesService {
-  private config = inject(ConfigService);
-  apiUrl = this.config.get<string>('apiUrl');
+  apiUrl = enviroment.apiUrl;
   publishers = [
     {
       id: 'DC Comics',

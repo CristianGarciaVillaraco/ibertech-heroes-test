@@ -12,7 +12,7 @@ import { delay, Observable, of } from 'rxjs';
 
 @Injectable()
 export class FakeBackendHttpInterceptor implements HttpInterceptor {
-  private _heroJsonPath = 'assets/backend/db.json';
+  private _heroJsonPath = 'backend/db.json';
   constructor(private http: HttpClient) {}
   intercept(
     req: HttpRequest<any>,

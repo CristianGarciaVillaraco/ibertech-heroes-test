@@ -1,7 +1,7 @@
 ::ng-deep .custom-dialog {
   overflow-y: auto;
   border-radius: 1%;
-  background-color: #e57373; /* Material Red 300 */
+  background-color: var(--mat-sys-error);
 }
 
 ::ng-deep mat-dialog-container {
@@ -9,19 +9,19 @@
   background-color: transparent !important;
 }
 
-.confirmDeleted {
-  color: #f44336; /* Material Red 500 */
+.confirm-deleted {
+  color: var(--mat-sys-error);
   font-weight: bold;
 }
 
 h1 {
-  color: #ffebee; /* Material Red 50 */
+  color: var(--mat-sys-on-error);
 }
 
 p {
-  color: #ffebee; /* Material Red 50 */
+  color: var(--mat-sys-on-error);
 }
 
-.buttonClose {
-  color: #efebe9; /* Material Brown 50 */
+.button-close {
+  color: var(--mat-sys-on-error);
 }

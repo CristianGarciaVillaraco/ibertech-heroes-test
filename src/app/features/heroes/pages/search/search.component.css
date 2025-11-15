@@ -1,5 +1,5 @@
 mat-option {
-  background-color: var(--mat-option-bg);
+  background-color: var(--mat-sys-error);
 }
 
 mat-divider {
@@ -17,4 +17,9 @@ h3 {
 #container {
   max-width: 40vh;
   height: auto;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }

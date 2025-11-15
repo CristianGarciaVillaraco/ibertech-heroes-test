@@ -11,19 +11,19 @@ export class ImagePipe implements PipeTransform {
         if (value.alt_img_fa) {
           return value.alt_img_fa;
         } else if (value.img_fa && value.isAssetsImg) {
-          return `assets/heroes/${value.img_fa}.jpg`;
+          return `heroes/${value.img_fa}.jpg`;
         }
         break;
       case false:
         if (value.alt_img) {
           return value.alt_img;
         } else if (value.id && value.isAssetsImg) {
-          return `assets/heroes/${value.id}.jpg`;
+          return `heroes/${value.id}.jpg`;
         }
         break;
       default:
-        return `assets/no-image.png`;
+        return `no-image.png`;
     }
-    return `assets/no-image.png`;
+    return `no-image.png`;
   }
 }

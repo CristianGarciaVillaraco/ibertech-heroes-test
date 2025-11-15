@@ -1,5 +1,5 @@
 {
-  "apiUrl": "https://localhost:3000/api",
+  "apiUrl": "https://localhost:4200",
   "debug": true,
   "featureFlags": {
     "showBetaUI": false

@@ -1,4 +1,4 @@
-<mat-card fxLayout="column" fxLayoutGap="20px">
+<mat-card class="flex-column">
   <mat-card-header>
     <mat-card-title> {{ hero.superhero | titlecase }} </mat-card-title>
     <mat-card-subtitle> {{ hero.alter_ego | titlecase }} </mat-card-subtitle>
@@ -19,11 +19,11 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-button class="readMore" (click)="viewHero()">
+    <button mat-button class="read-more" (click)="viewHero()">
       Leer más...
     </button>
 
-    <button mat-button color="info" [routerLink]="['/heroes/edit', hero.id]">
+    <button mat-button class="btn-info" [routerLink]="['/heroes/', hero.id]">
       Editar
     </button>
   </mat-card-actions>

@@ -42,7 +42,13 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/config/config.json",
+                  "with": "src/app/config/config.json"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"

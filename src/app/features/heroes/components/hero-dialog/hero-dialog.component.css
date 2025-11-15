@@ -1,4 +1,4 @@
-#imgCover {
+#img-cover {
   max-width: 100%;
   height: auto;
   display: block;
@@ -7,32 +7,55 @@
 ::ng-deep .custom-dialog {
   overflow-y: auto;
   border-radius: 1%;
-  background-color: #e57373; /* Material Red 300 */
 }
-
 ::ng-deep mat-dialog-container {
   border-radius: 1%;
   background-color: transparent !important;
   max-height: 90vh;
   max-width: 90vh;
 }
-
 .content {
-  color: #ffebee; /* Material Red 50 */
+  color: var(--mat-sys-on-primary);
 }
 
-#imgFA {
+#img-f-a {
   max-width: 30%;
   height: auto;
   display: block;
   padding-left: 16px;
 }
 
-#removePaddingBottom {
+#remove-padding-bottom {
   padding-bottom: 0;
 }
 
 p {
   padding-left: 16px;
   word-wrap: break-word;
+}
+
+.flex-50 {
+  flex: 0 0 50%;
+}
+
+.column-gap-10 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* xs → column (pantallas pequeñas) */
+@media (max-width: 599px) {
+  .content {
+    flex-direction: column;
+  }
+}
+
+mat-grid-list {
+  background-color: var(--mat-sys-primary);
 }

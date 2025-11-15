@@ -2,10 +2,6 @@
   <mat-sidenav #sidenav mode="push" class="sidenav">
     <mat-toolbar class="subToolbar">
       <span>Menu</span>
-      <span class="spacer"></span>
-      <button mat-icon-button (click)="sidenav.toggle()">
-        <mat-icon>menu</mat-icon>
-      </button>
     </mat-toolbar>
     <mat-nav-list>
       <a routerLink="./list" mat-list-item (click)="sidenav.toggle()">
@@ -16,13 +12,13 @@
         <mat-icon mat-list-icon>search</mat-icon>
         <span>Buscar de Héroes</span>
       </a>
-      <a routerLink="./add" mat-list-item (click)="sidenav.toggle()">
+      <a routerLink="./new" mat-list-item (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>add</mat-icon>
         <span>Crear Heroe</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-toolbar color="primary">
+  <mat-toolbar>
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>

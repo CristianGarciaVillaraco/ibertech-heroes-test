@@ -1,8 +1,8 @@
 <mat-grid-list cols="1">
   @defer (when hero) {
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" class="content">
-    <div fxFlex="50">
-      <div fxLayout="column" fxLayoutGap="10px">
+  <div class="content">
+    <div class="flex-50">
+      <div class="column-gap-10">
         <div>
           <h1>
             {{ hero.superhero }} <small>- {{ hero.alter_ego }}</small>
@@ -10,32 +10,32 @@
           <mat-divider></mat-divider>
         </div>
         <div>
-          <img id="imgCover" [src]="hero | image : false" />
+          <img id="img-cover" [src]="hero | image : false" />
         </div>
       </div>
     </div>
-    <div fxFlex="50">
+    <div class="flex-50">
       <h1>Ficha técnica</h1>
       <mat-divider></mat-divider>
       <mat-list>
-        <div mat-subheader id="removePaddingBottom">Alter ego:</div>
+        <div mat-subheader id="remove-padding-bottom">Alter ego:</div>
         <p>{{ hero.alter_ego }}</p>
-        <div mat-subheader id="removePaddingBottom">
+        <div mat-subheader id="remove-padding-bottom">
           {{ hero.characters.length | i18nPlural : charactersMap }}
         </div>
         <p>{{ hero.characters | ascendingOrder }}</p>
-        <div mat-subheader id="removePaddingBottom">Publicado por</div>
+        <div mat-subheader id="remove-padding-bottom">Publicado por</div>
         <p>{{ hero.publisher }}</p>
-        <div mat-subheader id="removePaddingBottom">
+        <div mat-subheader id="remove-padding-bottom">
           {{ hero.originators.length | i18nPlural : originatorsMap }}
         </div>
         <p>{{ hero.originators | ascendingOrder }}</p>
-        <div mat-subheader id="removePaddingBottom">Descripción:</div>
+        <div mat-subheader id="remove-padding-bottom">Descripción:</div>
         <p cdkTextareaAutosize>{{ hero.description }}</p>
-        <div mat-subheader id="removePaddingBottom">Primera aparición</div>
-        <div fxLayout="column">
+        <div mat-subheader id="remove-padding-bottom">Primera aparición</div>
+        <div class="flex-column">
           <p>{{ hero.first_appearance }}</p>
-          <img id="imgFA" [src]="hero | image : true" />
+          <img id="img-f-a" [src]="hero | image : true" />
         </div>
       </mat-list>
     </div>

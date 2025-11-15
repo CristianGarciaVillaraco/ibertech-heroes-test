@@ -9,6 +9,60 @@ mat-form-field {
 }
 
 mat-error {
-  color: #e57373;
+  color: var(--mat-sys-error);
   font-size: 15px;
+}
+
+.layout-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.flex-50 {
+  flex: 0 0 50%;
+}
+
+.flex-45 {
+  flex: 0 0 45%;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.gap-40 {
+  gap: 40px;
+}
+
+button[mat-raised-button].primary {
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+}
+
+button[mat-raised-button].error {
+  background-color: var(--mat-sys-error);
+  color: var(--mat-sys-on-error);
+}
+
+button[mat-raised-button].btn-warn {
+  background-color: var(--mat-sys-error);
+  color: var(--mat-sys-on-error);
+}
+
+button[mat-raised-button].btn-warn:hover {
+  background-color: var(--mat-sys-error-container);
+  color: var(--mat-sys-on-error-container);
 }

@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImagePipe } from '../../pipes/image/image.pipe';
 import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-hero-form',
@@ -33,6 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatChipsModule,
     MatFormFieldModule,
     MatIconModule,
+    MatInputModule,
     MatSelectModule,
   ],
   templateUrl: './hero-form.component.html',

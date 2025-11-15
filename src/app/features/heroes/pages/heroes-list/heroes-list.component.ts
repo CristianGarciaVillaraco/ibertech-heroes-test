@@ -3,6 +3,7 @@ import { Hero } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { HeroCardComponent } from '../../components/hero-card/hero-card.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes-list',
@@ -12,8 +13,7 @@ import { HeroCardComponent } from '../../components/hero-card/hero-card.componen
 })
 export class HeroesListComponent implements OnInit {
   heroes: Hero[] = [];
-  showLoading: boolean = false;
-
+  heroes$: Observable<Hero[]> = new Observable<Hero[]>();
   constructor(private heroesService: HeroesService) {}
 
   ngOnInit(): void {
@@ -21,17 +21,15 @@ export class HeroesListComponent implements OnInit {
   }
 
   getAllHeroes() {
-    this.showLoading = true;
-    this.heroesService.getHeroes().subscribe(
-      (resp) => {
+    this.heroesService.getHeroes().subscribe({
+      next: (resp) => {
         if (resp.status === 200) {
           this.heroes = resp.body.heroes;
           this.saveHeroesInSession();
         }
       },
-      (err) => console.error('Error Occured When Get All Heroes ' + err),
-      () => (this.showLoading = false)
-    );
+      error: (err) => console.error('Error Occured When Get All Heroes ' + err),
+    });
   }
 
   saveHeroesInSession() {

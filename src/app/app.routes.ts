@@ -1,10 +1,21 @@
 import { Routes } from '@angular/router';
-import { NotFoundComponent } from './pages/not-found/not-found';
+import { NotFoundComponent } from './features/not-found/not-found';
 
 export const routes: Routes = [
   {
+    path: 'heroes',
+    loadChildren: () =>
+      import('./features/heroes/heroes.routes').then((r) => r.heroesRoutes),
+  },
+  {
     path: '404',
-    component: NotFoundComponent,
+    loadComponent: () =>
+      import('./features/not-found/not-found').then((c) => c.NotFoundComponent),
+  },
+  {
+    path: '',
+    redirectTo: 'heroes',
+    pathMatch: 'full',
   },
   {
     path: '**',

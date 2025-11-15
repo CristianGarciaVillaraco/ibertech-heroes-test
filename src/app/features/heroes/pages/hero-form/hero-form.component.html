@@ -3,16 +3,11 @@
   <small>{{ hero.superhero | titlecase }}</small>
 </h1>
 
-<div
-  fxLayout="row"
-  fxLayout.lt-lg="column"
-  fxLayoutGap="40px"
-  fxLayoutAlign="center"
->
-  <div fxFlex="50" fxLayout="column">
+<div class="layout-container">
+  <div class="flex-50 flex-column">
     <form (submit)="save()" [formGroup]="heroForm">
-      <div fxLayout="row" fxLayoutGap="20" fxLayout.xs="colums">
-        <mat-form-field fxFlex="100" fxLayout.xs="colums">
+      <div class="form-row">
+        <mat-form-field class="flex-100 responsive-column">
           <mat-label>Super Héroe</mat-label>
           <input matInput type="text" formControlName="superhero" />
           @if (heroForm.get('superhero')?.invalid) {
@@ -42,7 +37,7 @@
           }
         </mat-form-field>
 
-        <mat-form-field fxFlex="100">
+        <mat-form-field class="flex-100">
           <mat-label>Alter Ego</mat-label>
           <input matInput type="text" formControlName="alter_ego" />
           @if (heroForm.get('alter_ego')?.invalid){
@@ -55,7 +50,7 @@
           }
         </mat-form-field>
       </div>
-      <div fxLayout="column">
+      <div class="flex-column">
         <mat-form-field appearance="fill">
           <mat-label>Personajes</mat-label>
           <mat-chip-grid
@@ -179,11 +174,11 @@
       </div>
       <br />
 
-      <div fxLayout>
+      <div class="flex-row">
         <button
           type="submit"
           mat-raised-button
-          color="primary"
+          class="primary"
           [disabled]="heroForm.invalid"
         >
           <mat-icon>edit</mat-icon>
@@ -196,7 +191,7 @@
           mat-raised-button
           type="button"
           [routerLink]="['list']"
-          color="primary"
+          class="primary"
         >
           <mat-icon>undo</mat-icon>
           Go back
@@ -208,7 +203,7 @@
           type="button"
           (click)="deletedHero()"
           mat-raised-button
-          color="warn"
+          class="btn-warn"
         >
           <mat-icon>remove</mat-icon>
           Borrar
@@ -217,11 +212,11 @@
       </div>
     </form>
   </div>
-  <div fxFlex="50" fxLayout="row" fxLayoutGap="40px">
-    <div fxFlex="45">
+  <div class="flex-50 flex-row gap-40">
+    <div class="flex-45">
       <img [src]="hero | image : false" />
     </div>
-    <div fxFlex="45">
+    <div class="flex-45">
       <img [src]="hero | image : true" />
     </div>
   </div>
