@@ -28,44 +28,17 @@ The main goals of this project are:
 
 ---
 
+## 📂 Project Structure
+
+For the complete and updated folder organization, please refer to the [Architecture Overview](./doc/architecture-overview.md).
+
+## 🔄 Data Flow
+
+This section describes the data flow based on the current architecture after the refactor.
+
 ## 🚀 Usage
 
-### **Development Server**
-
-Start the development server with:
-
-```bash
-ng serve
-```
-
-Open your browser at: [http://localhost:4200](http://localhost:4200)
-The app will automatically reload when source files change.
-
-### Build
-
-```bash
-ng build
-```
-
-Compiled files are output to **dist/** and optimized for production.
-
-### Testing
-
-- **Unit Tests**
-
-```bash
-ng test
-```
-
-- **End-to-End Test**
-
-```bash
-ng e2e
-```
-
-**Note: Angular CLI** no longer includes an e2e framework by default. You can integrate Cypress, Playwright, or another tool of your choice.
-
----
+For setup instructions and how to run the project, see the **[Setup Guide](./docs/setup-guide.md)**.
 
 ## 📚 Features
 
@@ -98,3 +71,11 @@ This branch contains the original **Angular 13 + Angular Material + SCSS** imple
 - Enhance UI/UX with modern Angular Material components
 
 ---
+
+## 📖 Documentation
+
+Additional documentation is available in the `/docs` folder:
+
+- **architecture-overview.md** → Explains the project’s structure and design decisions
+- **setup-guide.md** → Step-by-step instructions to set up and run the project
+- **changelog.md** → (Optional) Tracks major changes and updates across versions
