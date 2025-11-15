@@ -1,0 +1,30 @@
+<mat-card class="flex-column">
+  <mat-card-header>
+    <mat-card-title> {{ hero.superhero | titlecase }} </mat-card-title>
+    <mat-card-subtitle> {{ hero.alter_ego | titlecase }} </mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image [src]="hero | image : false" />
+
+  <mat-card-content>
+    <h3>{{ hero.publisher }}</h3>
+    <p>
+      <strong>Primera aparición</strong> {{ hero.first_appearance }}
+      <br />
+      <strong
+        >{{ hero.characters.length | i18nPlural : charactersMap }}
+      </strong>
+      {{ hero.characters | ascendingOrder }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button class="read-more" (click)="viewHero()">
+      Leer más...
+    </button>
+
+    <button mat-button class="btn-info" [routerLink]="['/heroes/', hero.id]">
+      Editar
+    </button>
+  </mat-card-actions>
+</mat-card>
