@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Hero } from '../../interfaces/hero.interface';
-import { HeroesService } from '../../services/heroes.service';
+import { HeroesService } from '../../services/heroes/heroes.service';
 import {
   MatAutocompleteModule,
   MatAutocompleteSelectedEvent,
@@ -10,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HeroCardComponent } from '../../components/hero-card/hero-card.component';
 import { CommonModule } from '@angular/common';
+import { IHero } from '../../../../core/models/hero.model';
 
 @Component({
   selector: 'app-search',
@@ -26,23 +26,19 @@ import { CommonModule } from '@angular/common';
 })
 export class SearchComponent {
   term: string = '';
-  heroes: Hero[] = [];
-  selectedHero!: Hero | undefined;
+  heroes: IHero[] = [];
+  selectedHero!: IHero | undefined;
   constructor(private heroesService: HeroesService) {}
 
-  searching() {
-    this.heroesService
-      .getSuggestions(this.term)
-      .subscribe((heroes) => (this.heroes = heroes));
-  }
+  searching() {}
 
   selectedOption(event: MatAutocompleteSelectedEvent) {
     if (!event.option.value) {
       this.selectedHero = undefined;
       return;
     }
-    const hero: Hero = event.option.value;
+    const hero: IHero = event.option.value;
     this.term = hero.superhero;
-    this.selectedHero = this.heroesService.getHeroForId(hero.id!);
+    // this.selectedHero = this.heroesService.getHeroForId(hero.id!);
   }
 }

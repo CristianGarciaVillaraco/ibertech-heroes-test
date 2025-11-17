@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Hero } from '../../interfaces/hero.interface';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
@@ -8,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { AscendingOrderPipe } from '../../pipes/ascending-order/ascending-order.pipe';
 import { CommonModule } from '@angular/common';
 import { ImagePipe } from '../../pipes/image/image.pipe';
+import { IHero } from '../../../../core/models/hero.model';
 
 @Component({
   selector: 'app-hero-dialog',
@@ -35,5 +35,5 @@ export class HeroDialogComponent {
     '=1': 'Creado por: ',
     other: 'Los creadores han sido: ',
   };
-  constructor(@Inject(MAT_DIALOG_DATA) public hero: Hero) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public hero: IHero) {}
 }

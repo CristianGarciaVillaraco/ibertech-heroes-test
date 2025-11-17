@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Hero } from '../../interfaces/hero.interface';
+import { IHero } from '../../../../core/models/hero.model';
 
 @Pipe({
   name: 'image',
 })
 export class ImagePipe implements PipeTransform {
-  transform(value: Hero, isFA: boolean) {
+  transform(value: IHero, isFA: boolean) {
     switch (isFA) {
       case true:
         if (value.alt_img_fa) {
