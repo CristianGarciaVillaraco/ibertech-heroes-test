@@ -10,10 +10,7 @@ This document provides an overview of the architecture and structure of the **He
 heroes-app/
 ├── public/                     # Public assets served directly
 │   ├── favicon.ico
-│   ├── 404.gif
 │   ├── no-image.png
-│   ├── backend/                # Mock backend JSON files
-│   │   └── heroes.json
 │   └── heroes/                 # Mock hero images
 │
 ├── src/
@@ -30,10 +27,12 @@ heroes-app/
 │   │   └── config.json
 │   │
 │   ├── core/                   # Global singletons used across app
+│   │   ├── db/                 # Database config files
 │   │   ├── interceptors/
-│   │   ├── services/
+│   │   ├── mocks/              # Mock backend JSON files
+│   │   ├── services/           # Global service
 |   |   ├── guards/
-│   │   └── models/
+│   │   └── models/             # Globla interfaces
 │   │
 │   ├── features/               # Main application domains (modules)
 │   │   ├── not-found/          # Example standalone feature page
@@ -48,6 +47,7 @@ heroes-app/
 │   ├── shared/                 # Reusable components & utilities
 │   │   ├── ui/                 # Shared UI components
 │   │   ├── pipes/              # Shared UI pipes
+│   │   ├── enums/              # Shared Enums
 │   │   └── directives/         # Shared UI directives
 │
 ├── angular.json
