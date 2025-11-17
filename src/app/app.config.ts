@@ -13,6 +13,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { fakeBackendProvider } from './core/interceptors/fake-back/fake-back.interceptor';
+import { InitDbService } from './core/services/init-db/init-db.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,10 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
+    provideAppInitializer(() => {
+      const initDb = inject(InitDbService);
+      return initDb.init();
+    }),
     fakeBackendProvider,
   ],
 };

@@ -19,6 +19,11 @@ export const routes: Routes = [
           ),
       },
       {
+        path: '',
+        redirectTo: 'heroes',
+        pathMatch: 'full',
+      },
+      {
         path: '**',
         redirectTo: '404',
       },
