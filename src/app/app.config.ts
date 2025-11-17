@@ -12,7 +12,6 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { fakeBackendProvider } from './core/interceptors/fake-back/fake-back.interceptor';
 import { InitDbService } from './core/services/init-db/init-db.service';
 
 export const appConfig: ApplicationConfig = {
@@ -25,6 +24,5 @@ export const appConfig: ApplicationConfig = {
       const initDb = inject(InitDbService);
       return initDb.init();
     }),
-    fakeBackendProvider,
   ],
 };
