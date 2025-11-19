@@ -1,0 +1,32 @@
+<h1>Listado de todos los heores</h1>
+<mat-divider></mat-divider>
+<br />
+
+<div class="heroes-container">
+  @for (hero of heroes$| async; track hero.id) {
+  <div class="hero-card">
+    <h3>{{ hero.superhero }}</h3>
+    <p><strong>Publisher:</strong> {{ hero.publisher }}</p>
+    <p><strong>Alter Ego:</strong> {{ hero.alter_ego }}</p>
+    <p><strong>First Appearance:</strong> {{ hero.first_appearance }}</p>
+
+    <p><strong>Characters:</strong></p>
+    <ul>
+      @for (c of hero.characters; track c) {
+      <li>{{ c }}</li>
+      }
+    </ul>
+
+    <p><strong>Originators:</strong></p>
+    <ul>
+      @for (o of hero.originators; track o) {
+      <li>{{ o }}</li>
+      }
+    </ul>
+
+    <p><strong>Description:</strong></p>
+    <p>{{ hero.description }}</p>
+  </div>
+
+  }
+</div>

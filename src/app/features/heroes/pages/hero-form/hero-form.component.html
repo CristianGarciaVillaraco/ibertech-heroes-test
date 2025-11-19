@@ -1,0 +1,67 @@
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
+  <!-- Superhero -->
+  <label>Superhero:</label>
+  <input formControlName="superhero" />
+
+  <!-- Publisher -->
+  <label>Publisher:</label>
+  <select formControlName="publisher">
+    @for (publisher of publishers; track publisher.id){
+    <option [value]="publisher.id">
+      {{ publisher.label }}
+    </option>
+    }
+  </select>
+
+  <!-- Alter Ego -->
+  <label>Alter Ego:</label>
+  <input formControlName="alter_ego" />
+
+  <!-- First Appearance -->
+  <label>First Appearance:</label>
+  <input formControlName="first_appearance" />
+
+  <!-- Characters -->
+  <label>Characters:</label>
+  <input #charInput />
+  <button
+    type="button"
+    (click)="addCharacter(charInput.value); charInput.value = ''"
+  >
+    Add
+  </button>
+  <ul>
+    @for (c of characters.controls; track c){
+    <li>{{ c.value }}</li>
+    }
+  </ul>
+
+  <!-- Originators -->
+  <label>Originators:</label>
+  <input #orgInput />
+  <button
+    type="button"
+    (click)="addOriginator(orgInput.value); orgInput.value = ''"
+  >
+    Add
+  </button>
+  <ul>
+    @for (o of originators.controls; track o){
+    <li>{{ o.value }}</li>
+    }
+  </ul>
+
+  <!-- Description -->
+  <label>Description:</label>
+  <textarea formControlName="description"></textarea>
+
+  <!-- Images -->
+  <label>Image URL:</label>
+  <input formControlName="img" />
+
+  <label>Image FA URL:</label>
+  <input formControlName="img_fa" />
+
+  <!-- Submit -->
+  <button type="submit">Save Hero</button>
+</form>

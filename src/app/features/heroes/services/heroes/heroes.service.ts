@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import enviroment from '../../../../config/config.json';
-import { HeroModel, IHero } from '../../../../core/models/hero.model';
+import { IHero } from '../../../../core/models/hero.model';
+import { HeroesDB } from '../../../../core/db/heroes.db';
+import { from, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroesService {
-  apiUrl = enviroment.apiUrl;
+  private db = new HeroesDB();
   publishers = [
     {
       id: 'DC Comics',
@@ -18,5 +19,23 @@ export class HeroesService {
     },
   ];
 
-  result: IHero = new HeroModel();
+  getAll(): Observable<IHero[]> {
+    return from(this.db.heroes.toArray());
+  }
+
+  getById(id: string): Observable<IHero | undefined> {
+    return from(this.db.heroes.get(id));
+  }
+
+  add(hero: IHero): Observable<string> {
+    return from(this.db.heroes.add(hero));
+  }
+
+  update(id: string, changes: Partial<IHero>): Observable<number> {
+    return from(this.db.heroes.update(id, changes));
+  }
+
+  delete(id: string): Observable<void> {
+    return from(this.db.heroes.delete(id));
+  }
 }
