@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const heroesRoutes: Routes = [
   {
+    path: '',
+    redirectTo: 'list',
+    pathMatch: 'full',
+  },
+  {
     path: 'list',
     loadComponent: () =>
       import('./pages/heroes-list/heroes-list.component').then(

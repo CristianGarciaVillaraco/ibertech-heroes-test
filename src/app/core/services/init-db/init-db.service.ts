@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { db } from '../../db/heroes.db';
-import { Hero } from '../../../features/heroes/interfaces/hero.interface';
 import { HEROES_MOCK } from '../../mocks/heroes.mock';
 
 @Injectable({
