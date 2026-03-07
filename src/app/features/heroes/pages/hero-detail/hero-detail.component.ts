@@ -3,6 +3,7 @@ import { HeroBiographyComponent } from '../../components/hero-biography/hero-bio
 import { HeroComicSectionComponent } from '../../components/hero-comic-section/hero-comic-section.component';
 import { HeroStatsComponent } from '../../components/hero-stats/hero-stats.component';
 import { HeroInfoCardsComponent } from '../../components/hero-info-cards/hero-info-cards.component';
+import { HeroRadarChartComponent } from '../../components/hero-radar-chart/hero-radar-chart.component';
 import { Router, RouterModule } from '@angular/router';
 import { HeroesService } from '../../services/heroes/heroes.service';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -17,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
     HeroComicSectionComponent,
     HeroStatsComponent,
     HeroInfoCardsComponent,
+    HeroRadarChartComponent,
     MatIcon,
     MatButtonModule,
     RouterModule,
