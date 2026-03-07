@@ -8,23 +8,24 @@ export const heroesRoutes: Routes = [
   },
   {
     path: 'list',
-    loadComponent: () =>
-      import('./pages/heroes-list/heroes-list.component').then(
-        (c) => c.HeroesListComponent
-      ),
+    loadComponent: () => import('./pages/heroes-list/heroes-list.component'),
   },
   {
     path: 'new',
     loadComponent: () =>
       import('./pages/hero-form/hero-form.component').then(
-        (c) => c.HeroFormComponent
+        (c) => c.HeroFormComponent,
+      ),
+  },
+  {
+    path: 'edit/:id',
+    loadComponent: () =>
+      import('./pages/hero-form/hero-form.component').then(
+        (c) => c.HeroFormComponent,
       ),
   },
   {
     path: ':id',
-    loadComponent: () =>
-      import('./pages/hero-form/hero-form.component').then(
-        (c) => c.HeroFormComponent
-      ),
+    loadComponent: () => import('./pages/hero-detail/hero-detail.component'),
   },
 ];

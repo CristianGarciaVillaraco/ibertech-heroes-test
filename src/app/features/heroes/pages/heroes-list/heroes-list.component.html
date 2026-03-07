@@ -1,32 +1,232 @@
-<h1>Listado de todos los heores</h1>
-<mat-divider></mat-divider>
-<br />
-
 <div class="heroes-container">
-  @for (hero of heroes$| async; track hero.id) {
-  <div class="hero-card">
-    <h3>{{ hero.superhero }}</h3>
-    <p><strong>Publisher:</strong> {{ hero.publisher }}</p>
-    <p><strong>Alter Ego:</strong> {{ hero.alter_ego }}</p>
-    <p><strong>First Appearance:</strong> {{ hero.first_appearance }}</p>
-
-    <p><strong>Characters:</strong></p>
-    <ul>
-      @for (c of hero.characters; track c) {
-      <li>{{ c }}</li>
-      }
-    </ul>
-
-    <p><strong>Originators:</strong></p>
-    <ul>
-      @for (o of hero.originators; track o) {
-      <li>{{ o }}</li>
-      }
-    </ul>
-
-    <p><strong>Description:</strong></p>
-    <p>{{ hero.description }}</p>
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Héroes</h1>
+      <span class="count-badge">{{ heroCount() }}</span>
+    </div>
+    <button mat-raised-button color="primary" routerLink="/heroes/new">
+      <mat-icon>add_circle</mat-icon>
+      Nuevo héroe
+    </button>
   </div>
 
+  <!-- Búsqueda principal -->
+  <div class="search-section">
+    <mat-form-field
+      appearance="outline"
+      class="search-field"
+      subscriptSizing="dynamic"
+    >
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        matInput
+        [ngModel]="searchTerm()"
+        (ngModelChange)="searchTerm.set($event)"
+        placeholder="Buscar héroes por nombre, alter ego, creador..."
+      />
+      @if (searchTerm()) {
+        <button matSuffix mat-icon-button (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
+  </div>
+
+  <!-- Filtros rápidos por Publisher -->
+  <div class="quick-filters">
+    <div class="publisher-buttons">
+      @for (publisher of publishers; track publisher) {
+        <button
+          mat-stroked-button
+          [class.selected]="isPublisherSelected(publisher)"
+          (click)="selectPublisher(publisher)"
+        >
+          {{ publisher }}
+        </button>
+      }
+    </div>
+
+    <button
+      mat-stroked-button
+      (click)="toggleAdvancedFilters()"
+      [class.active]="showAdvancedFilters()"
+      class="advanced-filters-btn"
+    >
+      <mat-icon>tune</mat-icon>
+      Más filtros
+      @if (advancedFiltersCount() > 0) {
+        <span class="filter-count">{{ advancedFiltersCount() }}</span>
+      }
+    </button>
+  </div>
+
+  <!-- Panel de filtros avanzados -->
+  @if (showAdvancedFilters()) {
+    <div class="advanced-filters-panel">
+      <div class="panel-header">
+        <h3>Filtros avanzados</h3>
+        @if (hasAdvancedFilters()) {
+          <button mat-button color="warn" (click)="clearAdvancedFilters()">
+            <mat-icon>clear</mat-icon>
+            Limpiar filtros avanzados
+          </button>
+        }
+      </div>
+
+      <div class="filters-grid">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Nombre del héroe</mat-label>
+          <input
+            matInput
+            [ngModel]="nameFilter()"
+            (ngModelChange)="nameFilter.set($event)"
+            placeholder="Ej: Spider-Man"
+          />
+          @if (nameFilter()) {
+            <button matSuffix mat-icon-button (click)="clearNameFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Alter Ego</mat-label>
+          <input
+            matInput
+            [ngModel]="alterEgoFilter()"
+            (ngModelChange)="alterEgoFilter.set($event)"
+            placeholder="Ej: Peter Parker"
+          />
+          @if (alterEgoFilter()) {
+            <button matSuffix mat-icon-button (click)="clearAlterEgoFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+          <mat-label>Creador</mat-label>
+          <input
+            matInput
+            [ngModel]="originatorFilter()"
+            (ngModelChange)="originatorFilter.set($event)"
+            placeholder="Ej: Stan Lee"
+          />
+          @if (originatorFilter()) {
+            <button matSuffix mat-icon-button (click)="clearOriginatorFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  }
+
+  <!-- Chips de filtros activos -->
+  @if (hasActiveFilters()) {
+    <div class="active-filters">
+      <span class="label">Filtros activos:</span>
+
+      <div class="chips-container">
+        @if (searchTerm()) {
+          <mat-chip (removed)="clearSearch()">
+            <mat-icon>search</mat-icon>
+            "{{ searchTerm() }}"
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+          </mat-chip>
+        }
+
+        @if (selectedPublisher() !== "all") {
+          <mat-chip (removed)="clearPublisher()">
+            <mat-icon>business</mat-icon>
+            {{ selectedPublisher() }}
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+          </mat-chip>
+        }
+
+        @if (nameFilter()) {
+          <mat-chip (removed)="clearNameFilter()">
+            <mat-icon>person</mat-icon>
+            Nombre: {{ nameFilter() }}
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+          </mat-chip>
+        }
+
+        @if (alterEgoFilter()) {
+          <mat-chip (removed)="clearAlterEgoFilter()">
+            <mat-icon>badge</mat-icon>
+            Alter Ego: {{ alterEgoFilter() }}
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+          </mat-chip>
+        }
+
+        @if (originatorFilter()) {
+          <mat-chip (removed)="clearOriginatorFilter()">
+            <mat-icon>brush</mat-icon>
+            Creador: {{ originatorFilter() }}
+            <button matChipRemove><mat-icon>cancel</mat-icon></button>
+          </mat-chip>
+        }
+      </div>
+
+      <button mat-button color="warn" (click)="clearAllFilters()">
+        Limpiar todo
+      </button>
+    </div>
+  }
+
+  <!-- Loading State — Skeleton Cards -->
+  @if (isLoading()) {
+    <div class="heroes-grid">
+      @for (item of skeletonItems; track item) {
+        <div class="skeleton-card">
+          <div class="skeleton-img"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line wide"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line short"></div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Error State -->
+  @if (hasError()) {
+    <div class="state-container error">
+      <mat-icon>error_outline</mat-icon>
+      <p>Error al cargar los héroes</p>
+      <button mat-raised-button color="primary">Reintentar</button>
+    </div>
+  }
+
+  <!-- Heroes Grid -->
+  @if (!isLoading() && !hasError()) {
+    @if (heroCards().length > 0) {
+      <div class="heroes-grid">
+        @for (card of heroCards(); track card.id) {
+          <app-card
+            (clicked)="clickedCard(card.id)"
+            [id]="card.id"
+            [imgBG]="card.imgBg"
+            [imgFront]="card.imgFront"
+            [imgHero]="card.imgHero"
+            [title]="card.title"
+          ></app-card>
+        }
+      </div>
+    } @else {
+      <div class="state-container empty">
+        <mat-icon>search_off</mat-icon>
+        <p class="title">No se encontraron héroes</p>
+        <p class="subtitle">Intenta ajustar los filtros de búsqueda</p>
+        @if (hasActiveFilters()) {
+          <button mat-raised-button color="primary" (click)="clearAllFilters()">
+            Limpiar filtros
+          </button>
+        }
+      </div>
+    }
   }
 </div>

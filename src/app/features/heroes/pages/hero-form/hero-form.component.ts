@@ -1,26 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HeroModel, IHero } from '../../../../core/models/hero.model';
-import { Publisher } from '../../../../shared/enums/publisher.enum';
+import { EPublisher } from '../../../../core/models/enums/publisher.enum';
 import { HeroesService } from '../../services/heroes/heroes.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { HeroModel } from '../../../../core/models/class/hero.class';
+import { IHero } from '../../../../core/models/interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-form',
-  imports: [ReactiveFormsModule],
+  imports: [
+    MatButtonModule,
+    MatChipsModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   templateUrl: './hero-form.component.html',
   styleUrl: './hero-form.component.css',
 })
 export class HeroFormComponent implements OnInit {
+  readonly charactersKeywords = signal<string[]>([]);
+  readonly originatorsKeywords = signal<string[]>([]);
+
   heroForm: FormGroup;
-  publishers = Object.entries(Publisher).map(([key, value]) => ({
+
+  publishers = Object.entries(EPublisher).map(([key, value]) => ({
     id: key,
     label: value,
   }));
@@ -32,18 +50,16 @@ export class HeroFormComponent implements OnInit {
     private fb: FormBuilder,
     private heroesService: HeroesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.heroForm = this.fb.group({
-      superhero: ['', Validators.required],
+      superhero: ['', [Validators.required, Validators.maxLength(20)]],
       publisher: ['DC', Validators.required],
-      alter_ego: ['', Validators.required],
-      first_appearance: ['', Validators.required],
-      characters: this.fb.array([]),
-      originators: this.fb.array([]),
+      alterEgo: ['', Validators.required],
+      firstAppearance: ['', Validators.required],
       description: [''],
       img: [''],
-      img_fa: [''],
+      imgFa: [''],
     });
   }
 
@@ -51,46 +67,25 @@ export class HeroFormComponent implements OnInit {
     this.heroId = this.route.snapshot.paramMap.get('id');
     if (this.heroId) {
       this.editing = true;
-      this.heroesService.getById(this.heroId).subscribe((hero) => {
+      this.heroesService.getHeroById(this.heroId).subscribe((hero) => {
         if (hero) {
+          const publisherKey = Object.entries(EPublisher).find(([, val]) => val === hero.publisher)?.[0] ?? 'DC';
           this.heroForm.patchValue({
             superhero: hero.superhero,
-            publisher: hero.publisher,
-            alter_ego: hero.alter_ego,
-            first_appearance: hero.first_appearance,
+            publisher: publisherKey,
+            alterEgo: hero.alterEgo,
+            firstAppearance: hero.firstAppearance,
             description: hero.description,
-            img: hero.img,
-            img_fa: hero.img_fa,
+            img: hero.fileManager?.imgHero ?? '',
+            imgFa: hero.fileManager?.imgFA ?? '',
           });
-          hero.characters.forEach((c) =>
-            this.characters.push(this.fb.control(c))
-          );
-          hero.originators.forEach((o) =>
-            this.originators.push(this.fb.control(o))
-          );
+          this.charactersKeywords.set(hero.characters);
+          this.originatorsKeywords.set(hero.originators);
         }
       });
     }
   }
 
-  // Helpers para arrays
-  get characters(): FormArray {
-    return this.heroForm.get('characters') as FormArray;
-  }
-
-  get originators(): FormArray {
-    return this.heroForm.get('originators') as FormArray;
-  }
-
-  addCharacter(name: string) {
-    if (name) this.characters.push(this.fb.control(name));
-  }
-
-  addOriginator(name: string) {
-    if (name) this.originators.push(this.fb.control(name));
-  }
-
-  // Generar ID según reglas
   generateId(): string {
     const publisher: string = this.heroForm.value.publisher;
     const superhero: string = this.heroForm.value.superhero;
@@ -99,10 +94,14 @@ export class HeroFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.heroForm.valid) {
+    if (this.heroForm.valid && this.originatorsKeywords().length > 0) {
+      const id = this.editing ? this.heroId! : this.generateId();
       const hero: IHero = new HeroModel({
         ...this.heroForm.value,
-        id: this.generateId(),
+        id,
+        key: id,
+        characters: this.charactersKeywords(),
+        originators: this.originatorsKeywords(),
       });
       this.save(hero);
     }
@@ -111,12 +110,32 @@ export class HeroFormComponent implements OnInit {
   save(hero: IHero) {
     if (this.editing) {
       this.heroesService.update(hero.id, hero).subscribe(() => {
-        this.router.navigate(['/heroes/list']);
+        this.router.navigate(['/heroes', hero.id]);
       });
     } else {
       this.heroesService.add(hero).subscribe(() => {
         this.router.navigate(['/heroes/list']);
       });
+    }
+  }
+
+  addChip(event: MatChipInputEvent, type: string): void {
+    const value = (event.value || '').trim();
+    if (value) {
+      if (type === 'character' && !this.charactersKeywords().includes(value)) {
+        this.charactersKeywords.update((kw) => [...kw, value]);
+      } else if (type === 'originator' && !this.originatorsKeywords().includes(value)) {
+        this.originatorsKeywords.update((kw) => [...kw, value]);
+      }
+    }
+    event.chipInput!.clear();
+  }
+
+  removeChip(keyword: string, type: string) {
+    if (type === 'character') {
+      this.charactersKeywords.update((kw) => kw.filter((k) => k !== keyword));
+    } else if (type === 'originator') {
+      this.originatorsKeywords.update((kw) => kw.filter((k) => k !== keyword));
     }
   }
 }

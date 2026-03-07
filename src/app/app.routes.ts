@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./app').then((c) => c.App),
     children: [
       {
         path: 'heroes',
@@ -11,13 +10,20 @@ export const routes: Routes = [
           import('./features/heroes/heroes.routes').then((r) => r.heroesRoutes),
       },
       {
+        path: 'about',
+        loadComponent: () =>
+          import('./features/about/about.component').then(
+            (c) => c.AboutComponent
+          ),
+      },
+      {
         path: '',
-        redirectTo: 'heroes',
-        pathMatch: 'full',
+        loadComponent: () =>
+          import('./features/init/init.component').then((c) => c.InitComponent),
       },
       {
         path: '**',
-        redirectTo: 'heroes',
+        redirectTo: '',
         pathMatch: 'full',
       },
     ],

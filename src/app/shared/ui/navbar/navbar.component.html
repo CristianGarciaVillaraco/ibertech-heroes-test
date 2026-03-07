@@ -1,0 +1,60 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- Logo y título -->
+    <a routerLink="/init" class="logo-section">
+      <img src="heroes-app.ico" class="logo" alt="Heroes App" />
+      <span class="logo-label">Heroes App</span>
+    </a>
+
+    <!-- Links de navegación -->
+    <div class="nav-links">
+      <a
+        mat-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link"
+      >
+        <span>Inicio</span>
+      </a>
+
+      <button
+        mat-button
+        [matMenuTriggerFor]="heroesMenu"
+        class="nav-link"
+        [class.active]="isHeroesActive()"
+      >
+        <span>Héroes</span>
+      </button>
+
+      <a
+        mat-button
+        routerLink="/about"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        <span>Acerca de</span>
+      </a>
+    </div>
+
+    <!-- Menú de héroes -->
+    <mat-menu #heroesMenu="matMenu" class="heroes-menu">
+      <button
+        mat-menu-item
+        routerLink="/heroes/list"
+        routerLinkActive="menu-item-active"
+      >
+        <mat-icon color="primary">list</mat-icon>
+        <span>Ver listado</span>
+      </button>
+      <button
+        mat-menu-item
+        routerLink="/heroes/new"
+        routerLinkActive="menu-item-active"
+      >
+        <mat-icon color="primary">add_circle</mat-icon>
+        <span>Crear héroe</span>
+      </button>
+    </mat-menu>
+  </div>
+</nav>

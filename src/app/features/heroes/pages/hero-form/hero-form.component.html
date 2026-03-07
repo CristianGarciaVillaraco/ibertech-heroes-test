@@ -1,67 +1,123 @@
-<form [formGroup]="heroForm" (ngSubmit)="onSubmit()">
-  <!-- Superhero -->
-  <label>Superhero:</label>
-  <input formControlName="superhero" />
+<div class="form-page">
+  <div class="form-header">
+    <button mat-icon-button routerLink="/heroes/list" type="button">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="form-title">{{ editing ? 'Editar héroe' : 'Nuevo héroe' }}</h1>
+  </div>
 
-  <!-- Publisher -->
-  <label>Publisher:</label>
-  <select formControlName="publisher">
-    @for (publisher of publishers; track publisher.id){
-    <option [value]="publisher.id">
-      {{ publisher.label }}
-    </option>
-    }
-  </select>
+  <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" class="form-body">
 
-  <!-- Alter Ego -->
-  <label>Alter Ego:</label>
-  <input formControlName="alter_ego" />
+    <!-- Superhero -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Nombre del superhéroe</mat-label>
+      <input matInput #superhero formControlName="superhero" maxlength="20" />
+      <mat-hint align="end">{{ superhero.value.length }} / 20</mat-hint>
+      @if (heroForm.get('superhero')?.hasError('required')) {
+        <mat-error>El nombre es obligatorio</mat-error>
+      }
+    </mat-form-field>
 
-  <!-- First Appearance -->
-  <label>First Appearance:</label>
-  <input formControlName="first_appearance" />
+    <!-- Publisher -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Publisher</mat-label>
+      <mat-select formControlName="publisher">
+        @for (publisher of publishers; track publisher.id) {
+          <mat-option [value]="publisher.id">{{ publisher.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
 
-  <!-- Characters -->
-  <label>Characters:</label>
-  <input #charInput />
-  <button
-    type="button"
-    (click)="addCharacter(charInput.value); charInput.value = ''"
-  >
-    Add
-  </button>
-  <ul>
-    @for (c of characters.controls; track c){
-    <li>{{ c.value }}</li>
-    }
-  </ul>
+    <!-- Alter Ego -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Alter Ego</mat-label>
+      <input matInput #alterEgo formControlName="alterEgo" maxlength="30" />
+      <mat-hint align="end">{{ alterEgo.value.length }} / 30</mat-hint>
+      @if (heroForm.get('alterEgo')?.hasError('required')) {
+        <mat-error>El alter ego es obligatorio</mat-error>
+      }
+    </mat-form-field>
 
-  <!-- Originators -->
-  <label>Originators:</label>
-  <input #orgInput />
-  <button
-    type="button"
-    (click)="addOriginator(orgInput.value); orgInput.value = ''"
-  >
-    Add
-  </button>
-  <ul>
-    @for (o of originators.controls; track o){
-    <li>{{ o.value }}</li>
-    }
-  </ul>
+    <!-- First Appearance -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Primera aparición</mat-label>
+      <input matInput formControlName="firstAppearance" maxlength="15" placeholder="Ej: Action Comics #1" />
+      @if (heroForm.get('firstAppearance')?.hasError('required')) {
+        <mat-error>La primera aparición es obligatoria</mat-error>
+      }
+    </mat-form-field>
 
-  <!-- Description -->
-  <label>Description:</label>
-  <textarea formControlName="description"></textarea>
+    <!-- Characters -->
+    <div class="chip-field">
+      <label class="chip-label">Personajes asociados</label>
+      <div class="chip-wrapper">
+        <mat-chip-grid #chipList aria-label="Personajes">
+          @for (keyword of charactersKeywords(); track keyword) {
+            <mat-chip (removed)="removeChip(keyword, 'character')">
+              {{ keyword }}
+              <button matChipRemove><mat-icon>cancel</mat-icon></button>
+            </mat-chip>
+          }
+          <input
+            placeholder="Añadir personaje y pulsar Enter..."
+            [matChipInputFor]="chipList"
+            (matChipInputTokenEnd)="addChip($event, 'character')"
+          />
+        </mat-chip-grid>
+      </div>
+    </div>
 
-  <!-- Images -->
-  <label>Image URL:</label>
-  <input formControlName="img" />
+    <!-- Originators -->
+    <div class="chip-field">
+      <label class="chip-label">Creadores <span class="required-mark">*</span></label>
+      <div class="chip-wrapper">
+        <mat-chip-grid #originatorsList aria-label="Creadores">
+          @for (keyword of originatorsKeywords(); track keyword) {
+            <mat-chip (removed)="removeChip(keyword, 'originator')">
+              {{ keyword }}
+              <button matChipRemove><mat-icon>cancel</mat-icon></button>
+            </mat-chip>
+          }
+          <input
+            placeholder="Añadir creador y pulsar Enter..."
+            [matChipInputFor]="originatorsList"
+            (matChipInputTokenEnd)="addChip($event, 'originator')"
+          />
+        </mat-chip-grid>
+      </div>
+      @if (originatorsKeywords().length === 0) {
+        <span class="chip-hint-error">Al menos un creador es obligatorio</span>
+      }
+    </div>
 
-  <label>Image FA URL:</label>
-  <input formControlName="img_fa" />
+    <!-- Description -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput #description formControlName="description" maxlength="500" rows="4"></textarea>
+      <mat-hint align="end">{{ description.value.length }} / 500</mat-hint>
+    </mat-form-field>
 
-  <!-- Submit -->
-  <button type="submit">Save Hero</button>
-</form>
+    <!-- Images -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>URL imagen del héroe</mat-label>
+      <mat-icon matPrefix>image</mat-icon>
+      <input matInput formControlName="img" type="url" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>URL imagen frontal (FA)</mat-label>
+      <mat-icon matPrefix>image</mat-icon>
+      <input matInput formControlName="imgFa" type="url" />
+    </mat-form-field>
+
+    <!-- Submit -->
+    <div class="form-actions">
+      <button mat-stroked-button type="button" routerLink="/heroes/list">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="heroForm.invalid || originatorsKeywords().length === 0">
+        <mat-icon>save</mat-icon>
+        {{ editing ? 'Guardar cambios' : 'Crear héroe' }}
+      </button>
+    </div>
+
+  </form>
+</div>
