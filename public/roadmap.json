@@ -1,0 +1,19 @@
+{
+  "currentFeatures": {
+    "title": "Funcionalidades actuales",
+    "items": [
+      "Listado de héroes",
+      "Creación de héroes",
+      "Detalle de héroes",
+      "Edición de héroes"
+    ]
+  },
+  "inProgress": {
+    "title": "En desarrollo",
+    "items": ["Comparación de héroes", "Línea de tiempo"]
+  },
+  "planned": {
+    "title": "Ideas futuras",
+    "items": ["Favoritos", "Estadísticas", "Ranking de poderes"]
+  }
+}

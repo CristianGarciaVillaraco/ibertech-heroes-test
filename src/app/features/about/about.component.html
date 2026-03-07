@@ -1,0 +1,80 @@
+<div class="about-container">
+  <h1 class="title">Acerca de HeroesApp</h1>
+  <h2 class="subtitle">Roadmap del proyecto</h2>
+
+  <div class="roadmap-grid">
+    @for (section of [roadmapConfig.currentFeatures, roadmapConfig.inProgress,
+    roadmapConfig.planned]; track section.title) {
+    <div class="roadmap-card">
+      <h3 class="card-title">{{ section.title }}</h3>
+
+      <div class="card-scroll">
+        @for (item of section.items; track $index) {
+        <div class="roadmap-item">
+          <mat-icon class="item-icon">check_circle</mat-icon>
+          <span>{{ item }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Estadísticas -->
+  @if (!heroesResource.isLoading() && stats().total > 0) {
+    <section class="stats-section">
+      <h2 class="stats-title">
+        <mat-icon>bar_chart</mat-icon>
+        Estadísticas de la base de datos
+      </h2>
+
+      <!-- KPI Cards -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-value">{{ stats().total }}</span>
+          <span class="kpi-label">Héroes totales</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-value">{{ stats().publisherBars.length }}</span>
+          <span class="kpi-label">Publishers</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-value">{{ stats().withCharacters }}</span>
+          <span class="kpi-label">Con personajes</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-value">{{ stats().withDescription }}</span>
+          <span class="kpi-label">Con descripción</span>
+        </div>
+      </div>
+
+      <!-- Gráfica de barras: héroes por publisher -->
+      <div class="chart-card">
+        <h3 class="chart-title">Héroes por Publisher</h3>
+        <div class="bar-chart">
+          @for (bar of stats().publisherBars; track bar.name) {
+            <div class="bar-row">
+              <span class="bar-label">{{ bar.name }}</span>
+              <div class="bar-track">
+                <div class="bar-fill" [style.width.%]="bar.pct">
+                  <span class="bar-value">{{ bar.count }}</span>
+                </div>
+              </div>
+              <span class="bar-pct">{{ bar.pct }}%</span>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- Botón -->
+  <button
+    mat-raised-button
+    color="primary"
+    routerLink="/heroes/list"
+    class="btn-explore"
+  >
+    Explorar héroes
+  </button>
+</div>
