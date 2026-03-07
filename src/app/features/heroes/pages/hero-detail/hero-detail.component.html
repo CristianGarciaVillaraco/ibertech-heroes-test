@@ -33,6 +33,9 @@
     </div>
   } @else if (hero(); as heroData) {
     <app-hero-info-cards [hero]="heroData" />
+    @if (heroData.powerStats) {
+      <app-hero-radar-chart [stats]="heroData.powerStats" />
+    }
     <app-hero-biography [description]="heroData.description" />
     <app-hero-stats [characters]="heroData.characters" [originators]="heroData.originators" />
     <app-hero-comic-section [firstAppearance]="heroData.firstAppearance" />

@@ -91,3 +91,75 @@
   color: var(--app-error);
   padding-left: 1rem;
 }
+
+/* Power Stats */
+.stats-section {
+  background: var(--app-surface-alt);
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.stats-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--app-primary);
+  margin: 0 0 1.25rem 0;
+}
+
+.stats-title mat-icon {
+  color: var(--app-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2rem;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.1rem;
+}
+
+.stat-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: var(--app-primary);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--app-text-body);
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--app-primary);
+  min-width: 2rem;
+  text-align: right;
+}
+
+.stat-slider {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

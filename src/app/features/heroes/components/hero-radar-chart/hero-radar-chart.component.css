@@ -1,0 +1,97 @@
+.radar-card {
+  background: white;
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.radar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--app-primary);
+  margin: 0 0 1rem 0;
+}
+
+.radar-icon {
+  font-size: 1.4rem;
+  background: var(--app-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.radar-svg {
+  width: 100%;
+  max-width: 360px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Grid */
+.grid-ring {
+  fill: none;
+  stroke: var(--app-border);
+  stroke-width: 1;
+}
+
+.grid-ring.ring-max {
+  stroke: var(--app-primary);
+  stroke-opacity: 0.3;
+}
+
+/* Axes */
+.axis-line {
+  stroke: var(--app-border);
+  stroke-width: 1;
+}
+
+/* Data */
+.data-polygon {
+  fill: url(#radarGrad);
+  stroke: var(--app-primary);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.data-point {
+  fill: var(--app-primary);
+  stroke: white;
+  stroke-width: 1.5;
+}
+
+/* Labels */
+.axis-label {
+  font-size: 10px;
+  font-weight: 600;
+  fill: var(--app-text-body);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.axis-label.anchor-start {
+  text-anchor: start;
+}
+
+.axis-label.anchor-end {
+  text-anchor: end;
+}
+
+.stat-value-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--app-primary);
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.stat-value-label.anchor-start {
+  text-anchor: start;
+}
+
+.stat-value-label.anchor-end {
+  text-anchor: end;
+}
