@@ -14,8 +14,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 import { HeroModel } from '../../../../core/models/class/hero.class';
-import { IHero } from '../../../../core/models/interfaces/hero.interface';
+import { DEFAULT_POWER_STATS, IHero, IPowerStats } from '../../../../core/models/interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-form',
@@ -26,6 +27,7 @@ import { IHero } from '../../../../core/models/interfaces/hero.interface';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
+    MatSliderModule,
     ReactiveFormsModule,
     RouterModule,
   ],
@@ -35,6 +37,17 @@ import { IHero } from '../../../../core/models/interfaces/hero.interface';
 export class HeroFormComponent implements OnInit {
   readonly charactersKeywords = signal<string[]>([]);
   readonly originatorsKeywords = signal<string[]>([]);
+
+  powerStats: IPowerStats = { ...DEFAULT_POWER_STATS };
+
+  readonly statLabels: { key: keyof IPowerStats; label: string; icon: string }[] = [
+    { key: 'intelligence', label: 'Inteligencia', icon: 'psychology' },
+    { key: 'strength',     label: 'Fuerza',       icon: 'fitness_center' },
+    { key: 'speed',        label: 'Velocidad',    icon: 'speed' },
+    { key: 'durability',   label: 'Durabilidad',  icon: 'shield' },
+    { key: 'combat',       label: 'Combate',      icon: 'sports_martial_arts' },
+    { key: 'power',        label: 'Poder',        icon: 'bolt' },
+  ];
 
   heroForm: FormGroup;
 
@@ -81,6 +94,9 @@ export class HeroFormComponent implements OnInit {
           });
           this.charactersKeywords.set(hero.characters);
           this.originatorsKeywords.set(hero.originators);
+          if (hero.powerStats) {
+            this.powerStats = { ...hero.powerStats };
+          }
         }
       });
     }
@@ -102,6 +118,7 @@ export class HeroFormComponent implements OnInit {
         key: id,
         characters: this.charactersKeywords(),
         originators: this.originatorsKeywords(),
+        powerStats: { ...this.powerStats },
       });
       this.save(hero);
     }

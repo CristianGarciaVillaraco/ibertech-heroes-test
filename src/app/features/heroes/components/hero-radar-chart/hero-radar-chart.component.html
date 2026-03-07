@@ -1,0 +1,64 @@
+<div class="radar-card">
+  <h3 class="radar-title">
+    <span class="radar-icon">⬡</span>
+    Estadísticas de poder
+  </h3>
+
+  <svg class="radar-svg" viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.5" />
+        <stop offset="100%" style="stop-color:#9333ea;stop-opacity:0.5" />
+      </linearGradient>
+    </defs>
+
+    <!-- Grid rings -->
+    @for (ring of rings; track ring) {
+      <polygon
+        [attr.points]="gridPolygon(ring)"
+        class="grid-ring"
+        [class.ring-max]="ring === 100"
+      />
+    }
+
+    <!-- Axis lines -->
+    @for (ax of axes; track ax.key) {
+      <line
+        [attr.x1]="cx" [attr.y1]="cy"
+        [attr.x2]="axisEnd(ax.angle).x" [attr.y2]="axisEnd(ax.angle).y"
+        class="axis-line"
+      />
+    }
+
+    <!-- Data polygon -->
+    <polygon [attr.points]="statPolygon()" class="data-polygon" />
+
+    <!-- Data points -->
+    @for (ax of axes; track ax.key) {
+      <circle
+        [attr.cx]="axisEnd(ax.angle).x * (statValue(ax.key) / 100) + cx * (1 - statValue(ax.key) / 100)"
+        [attr.cy]="axisEnd(ax.angle).y * (statValue(ax.key) / 100) + cy * (1 - statValue(ax.key) / 100)"
+        r="4"
+        class="data-point"
+      />
+    }
+
+    <!-- Labels -->
+    @for (ax of axes; track ax.key) {
+      <text
+        [attr.x]="labelPos(ax.angle).x"
+        [attr.y]="labelPos(ax.angle).y"
+        class="axis-label"
+        [class.anchor-start]="labelPos(ax.angle).x > cx + 10"
+        [class.anchor-end]="labelPos(ax.angle).x < cx - 10"
+      >{{ ax.label }}</text>
+      <text
+        [attr.x]="labelPos(ax.angle).x"
+        [attr.y]="labelPos(ax.angle).y + 14"
+        class="stat-value-label"
+        [class.anchor-start]="labelPos(ax.angle).x > cx + 10"
+        [class.anchor-end]="labelPos(ax.angle).x < cx - 10"
+      >{{ statValue(ax.key) }}</text>
+    }
+  </svg>
+</div>

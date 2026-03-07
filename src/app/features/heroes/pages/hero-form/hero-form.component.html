@@ -110,6 +110,31 @@
       <input matInput formControlName="imgFa" type="url" />
     </mat-form-field>
 
+    <!-- Power Stats -->
+    <div class="stats-section">
+      <h3 class="stats-title">
+        <mat-icon>radar</mat-icon>
+        Estadísticas de poder
+      </h3>
+      <div class="stats-grid">
+        @for (stat of statLabels; track stat.key) {
+          <div class="stat-row">
+            <div class="stat-header">
+              <mat-icon class="stat-icon">{{ stat.icon }}</mat-icon>
+              <span class="stat-label">{{ stat.label }}</span>
+              <span class="stat-value">{{ powerStats[stat.key] }}</span>
+            </div>
+            <mat-slider min="0" max="100" step="1" class="stat-slider">
+              <input matSliderThumb
+                [value]="powerStats[stat.key]"
+                (valueChange)="powerStats[stat.key] = $event"
+              />
+            </mat-slider>
+          </div>
+        }
+      </div>
+    </div>
+
     <!-- Submit -->
     <div class="form-actions">
       <button mat-stroked-button type="button" routerLink="/heroes/list">Cancelar</button>
