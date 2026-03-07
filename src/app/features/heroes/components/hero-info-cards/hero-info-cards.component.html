@@ -1,0 +1,90 @@
+<div class="hero-header">
+  <!-- IMAGEN DEL HÉROE -->
+  <div class="hero-image-container">
+    @if (hero().fileManager?.imgHero) {
+      <img
+        [src]="hero().fileManager?.imgHero"
+        [alt]="hero().superhero"
+        class="hero-image"
+      />
+    } @else {
+      <div class="hero-image-placeholder">
+        <mat-icon>person</mat-icon>
+        <span>Sin imagen</span>
+      </div>
+    }
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-cards-section">
+    <h2 class="section-title">Información del héroe</h2>
+
+    <div class="cards-grid">
+      <!-- Card: Nombre -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Nombre</span>
+          <span class="card-value">{{ hero().superhero }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Alter Ego -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>badge</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Alter Ego</span>
+          <span class="card-value">{{ hero().alterEgo }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Publisher -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>business</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Publisher</span>
+          <span class="card-value">{{ hero().publisher }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Creadores -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>brush</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Creadores</span>
+          <span class="card-value">{{ hero().originators.join(", ") }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Primera Aparición -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>auto_stories</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Primera aparición</span>
+          <span class="card-value">{{ hero().firstAppearance }}</span>
+        </div>
+      </div>
+
+      <!-- Card: Personajes -->
+      <div class="info-card">
+        <div class="card-icon">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <div class="card-content">
+          <span class="card-label">Personajes</span>
+          <span class="card-value">{{ hero().characters.join(", ") }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<section class="stats-section">
+  @if (characters().length > 0) {
+    <div class="stat-group">
+      <h3 class="section-title">
+        <mat-icon>groups</mat-icon>
+        Personajes asociados
+      </h3>
+      <mat-chip-set>
+        @for (character of characters(); track character) {
+          <mat-chip>{{ character }}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+  }
+
+  @if (originators().length > 0) {
+    <div class="stat-group">
+      <h3 class="section-title">
+        <mat-icon>brush</mat-icon>
+        Creadores
+      </h3>
+      <mat-chip-set>
+        @for (originator of originators(); track originator) {
+          <mat-chip>{{ originator }}</mat-chip>
+        }
+      </mat-chip-set>
+    </div>
+  }
+</section>

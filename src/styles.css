@@ -1,8 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* ===== Design Tokens ===== */
+:root {
+  --app-primary: #4f46e5;
+  --app-secondary: #9333ea;
+  --app-gradient: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+  --app-primary-bg: #eef2ff;
+  --app-border: #e0e0f0;
+  --app-surface: #ffffff;
+  --app-surface-alt: #f5f3ff;
+  --app-text: #1e1b4b;
+  --app-text-body: #312e81;
+  --app-text-muted: #6b7280;
+  --app-text-light: #a5b4fc;
+  --app-error: #ef4444;
+}
+
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
@@ -12,4 +30,57 @@ body {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+/* ===== Mat-Menu overlay (fuera del shadow DOM del navbar) ===== */
+.mat-mdc-menu-panel {
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.15) !important;
+  margin-top: 0.5rem;
+}
+
+.mat-mdc-menu-content {
+  padding: 0.5rem 0 !important;
+}
+
+.mat-mdc-menu-item {
+  min-height: 48px;
+}
+
+.mat-mdc-menu-item .mat-mdc-menu-item-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--app-primary) !important;
+  font-weight: 500;
+}
+
+.mat-mdc-menu-item mat-icon,
+.mat-mdc-menu-item .mat-icon {
+  color: var(--app-primary) !important;
+  font-size: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.mat-mdc-menu-item:hover .mat-mdc-menu-item-text {
+  color: var(--app-secondary) !important;
+}
+
+.mat-mdc-menu-item:hover mat-icon,
+.mat-mdc-menu-item:hover .mat-icon {
+  color: var(--app-secondary) !important;
+}
+
+.mat-mdc-menu-item:hover {
+  background-color: var(--app-surface-alt) !important;
+}
+
+.mat-mdc-menu-item.menu-item-active .mat-mdc-menu-item-text {
+  color: var(--app-primary) !important;
+  font-weight: 600;
+}
+
+.mat-mdc-menu-item.menu-item-active mat-icon {
+  color: var(--app-primary) !important;
 }

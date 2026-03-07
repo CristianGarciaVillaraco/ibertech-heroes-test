@@ -1,0 +1,29 @@
+.biography-section {
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: white;
+  border: 1px solid var(--app-border);
+  border-radius: 16px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--app-primary);
+  margin: 0 0 1.25rem 0;
+}
+
+.section-title mat-icon {
+  color: var(--app-primary);
+}
+
+.biography-text {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--app-text-body);
+  margin: 0;
+  white-space: pre-wrap;
+}

@@ -1,0 +1,21 @@
+@if (!hasError("bg")) {
+  <div class="card" [class.card-clicked]="isAnimating" (click)="onCardClick()">
+    <img class="card-bg" [src]="imgBG()" (error)="imgNoExist('bg')" />
+
+    <div class="cover">
+      @if (!hasError("front")) {
+        <img
+          class="card-front"
+          [src]="imgFront()"
+          (error)="imgNoExist('front')"
+        />
+      }
+
+      @if (!hasError("hero")) {
+        <img class="card-hero" [src]="imgHero()" (error)="imgNoExist('hero')" />
+      }
+
+      <h3 class="card-title">{{ title() | cleanText }}</h3>
+    </div>
+  </div>
+}
