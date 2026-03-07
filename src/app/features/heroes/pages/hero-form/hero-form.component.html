@@ -1,6 +1,7 @@
 <div class="form-page">
+  <app-breadcrumb [items]="breadcrumb" />
   <div class="form-header">
-    <button mat-icon-button routerLink="/heroes/list" type="button">
+    <button mat-icon-button (click)="goBack()" type="button">
       <mat-icon>arrow_back</mat-icon>
     </button>
     <h1 class="form-title">{{ editing ? 'Editar héroe' : 'Nuevo héroe' }}</h1>
@@ -49,9 +50,9 @@
 
     <!-- Characters -->
     <div class="chip-field">
-      <label class="chip-label">Personajes asociados</label>
-      <div class="chip-wrapper">
-        <mat-chip-grid #chipList aria-label="Personajes">
+      <label class="chip-label">Alter Egos</label>
+      <div class="chip-wrapper" (click)="charInput.focus()">
+        <mat-chip-grid #chipList aria-label="Alter Egos">
           @for (keyword of charactersKeywords(); track keyword) {
             <mat-chip (removed)="removeChip(keyword, 'character')">
               {{ keyword }}
@@ -59,7 +60,8 @@
             </mat-chip>
           }
           <input
-            placeholder="Añadir personaje y pulsar Enter..."
+            #charInput
+            placeholder="Añadir alter ego y pulsar Enter..."
             [matChipInputFor]="chipList"
             (matChipInputTokenEnd)="addChip($event, 'character')"
           />
@@ -70,7 +72,7 @@
     <!-- Originators -->
     <div class="chip-field">
       <label class="chip-label">Creadores <span class="required-mark">*</span></label>
-      <div class="chip-wrapper">
+      <div class="chip-wrapper" (click)="origInput.focus()">
         <mat-chip-grid #originatorsList aria-label="Creadores">
           @for (keyword of originatorsKeywords(); track keyword) {
             <mat-chip (removed)="removeChip(keyword, 'originator')">
@@ -79,6 +81,7 @@
             </mat-chip>
           }
           <input
+            #origInput
             placeholder="Añadir creador y pulsar Enter..."
             [matChipInputFor]="originatorsList"
             (matChipInputTokenEnd)="addChip($event, 'originator')"
@@ -137,7 +140,7 @@
 
     <!-- Submit -->
     <div class="form-actions">
-      <button mat-stroked-button type="button" routerLink="/heroes/list">Cancelar</button>
+      <button mat-stroked-button type="button" (click)="goBack()">Cancelar</button>
       <button mat-raised-button color="primary" type="submit" [disabled]="heroForm.invalid || originatorsKeywords().length === 0">
         <mat-icon>save</mat-icon>
         {{ editing ? 'Guardar cambios' : 'Crear héroe' }}

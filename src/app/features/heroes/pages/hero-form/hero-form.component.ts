@@ -1,4 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
+import { BreadcrumbComponent, BreadcrumbItem } from '../../../../shared/ui/breadcrumb/breadcrumb.component';
 import {
   FormBuilder,
   FormGroup,
@@ -7,6 +8,7 @@ import {
 } from '@angular/forms';
 import { EPublisher } from '../../../../core/models/enums/publisher.enum';
 import { HeroesService } from '../../services/heroes/heroes.service';
+import { Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -21,6 +23,7 @@ import { DEFAULT_POWER_STATS, IHero, IPowerStats } from '../../../../core/models
 @Component({
   selector: 'app-hero-form',
   imports: [
+    BreadcrumbComponent,
     MatButtonModule,
     MatChipsModule,
     MatFormFieldModule,
@@ -58,11 +61,13 @@ export class HeroFormComponent implements OnInit {
 
   editing = false;
   heroId: string | null = null;
+  breadcrumb: BreadcrumbItem[] = [{ label: 'Héroes', route: '/heroes/list' }, { label: 'Nuevo héroe' }];
 
   constructor(
     private fb: FormBuilder,
     private heroesService: HeroesService,
     private router: Router,
+    private location: Location,
     private route: ActivatedRoute,
   ) {
     this.heroForm = this.fb.group({
@@ -80,6 +85,7 @@ export class HeroFormComponent implements OnInit {
     this.heroId = this.route.snapshot.paramMap.get('id');
     if (this.heroId) {
       this.editing = true;
+      this.breadcrumb = [{ label: 'Héroes', route: '/heroes/list' }, { label: 'Editar héroe' }];
       this.heroesService.getHeroById(this.heroId).subscribe((hero) => {
         if (hero) {
           const publisherKey = Object.entries(EPublisher).find(([, val]) => val === hero.publisher)?.[0] ?? 'DC';
@@ -100,6 +106,10 @@ export class HeroFormComponent implements OnInit {
         }
       });
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   generateId(): string {

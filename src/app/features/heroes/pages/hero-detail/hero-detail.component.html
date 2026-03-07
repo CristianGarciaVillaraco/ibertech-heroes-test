@@ -1,5 +1,7 @@
 <div class="hero-detail-container">
 
+  <app-breadcrumb [items]="breadcrumb()" />
+
   <!-- Barra de acciones superior -->
   <div class="detail-toolbar">
     <button mat-icon-button (click)="goBack()" aria-label="Volver al listado">
@@ -33,10 +35,10 @@
     </div>
   } @else if (hero(); as heroData) {
     <app-hero-info-cards [hero]="heroData" />
+    <app-hero-biography [description]="heroData.description" />
     @if (heroData.powerStats) {
       <app-hero-radar-chart [stats]="heroData.powerStats" />
     }
-    <app-hero-biography [description]="heroData.description" />
     <app-hero-stats [characters]="heroData.characters" [originators]="heroData.originators" />
     <app-hero-comic-section [firstAppearance]="heroData.firstAppearance" />
   }
