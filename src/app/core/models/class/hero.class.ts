@@ -1,5 +1,5 @@
 import { EPublisher } from '../enums/publisher.enum';
-import { IFileManager, IHero } from '../interfaces/hero.interface';
+import { DEFAULT_POWER_STATS, IFileManager, IHero, IPowerStats } from '../interfaces/hero.interface';
 
 export class HeroModel implements IHero {
   id: string;
@@ -12,6 +12,7 @@ export class HeroModel implements IHero {
   originators: string[];
   description: string;
   fileManager?: IFileManager;
+  powerStats: IPowerStats;
 
   constructor(data?: IHero) {
     this.id = data?.id || '';
@@ -24,5 +25,6 @@ export class HeroModel implements IHero {
     this.originators = data?.originators || [];
     this.description = data?.description || '';
     this.fileManager = data?.fileManager || undefined;
+    this.powerStats = data?.powerStats ?? { ...DEFAULT_POWER_STATS };
   }
 }

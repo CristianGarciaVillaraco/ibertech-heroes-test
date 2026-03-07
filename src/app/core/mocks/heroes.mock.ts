@@ -1,6 +1,27 @@
 import { EPublisher } from '../models/enums/publisher.enum';
-import { IHero } from '../models/interfaces/hero.interface';
+import { IHero, IPowerStats } from '../models/interfaces/hero.interface';
 import { v4 as uuidv4 } from 'uuid';
+
+const HERO_POWER_STATS: Record<string, IPowerStats> = {
+  'dc-batman':            { strength: 35, speed: 27, intelligence: 100, durability: 44, combat: 100, power: 28 },
+  'dc-superman':          { strength: 100, speed: 96, intelligence: 94, durability: 100, combat: 85, power: 100 },
+  'dc-flash':             { strength: 48, speed: 100, intelligence: 88, durability: 50, combat: 70, power: 80 },
+  'dc-green-lantern':     { strength: 80, speed: 90, intelligence: 80, durability: 80, combat: 70, power: 100 },
+  'dc-green-arrow':       { strength: 28, speed: 25, intelligence: 75, durability: 28, combat: 90, power: 10 },
+  'dc-wonder-woman':      { strength: 95, speed: 90, intelligence: 88, durability: 90, combat: 100, power: 95 },
+  'dc-martian-manhunter': { strength: 100, speed: 85, intelligence: 100, durability: 90, combat: 85, power: 100 },
+  'dc-robin':             { strength: 28, speed: 27, intelligence: 63, durability: 28, combat: 85, power: 10 },
+  'marvel-spider-man':    { strength: 55, speed: 55, intelligence: 90, durability: 55, combat: 80, power: 60 },
+  'marvel-captain-america': { strength: 60, speed: 50, intelligence: 69, durability: 60, combat: 100, power: 30 },
+  'marvel-iron-man':      { strength: 85, speed: 75, intelligence: 100, durability: 85, combat: 64, power: 85 },
+  'marvel-thor':          { strength: 100, speed: 92, intelligence: 80, durability: 100, combat: 90, power: 100 },
+  'marvel-hulk':          { strength: 100, speed: 65, intelligence: 25, durability: 100, combat: 85, power: 98 },
+  'marvel-wolverine':     { strength: 55, speed: 38, intelligence: 63, durability: 100, combat: 95, power: 45 },
+  'marvel-daredevil':     { strength: 28, speed: 27, intelligence: 63, durability: 28, combat: 95, power: 10 },
+  'marvel-hawkeye':       { strength: 28, speed: 27, intelligence: 69, durability: 28, combat: 90, power: 10 },
+  'marvel-cyclops':       { strength: 28, speed: 27, intelligence: 75, durability: 28, combat: 85, power: 80 },
+  'marvel-silver-surfer': { strength: 100, speed: 100, intelligence: 88, durability: 100, combat: 80, power: 100 },
+};
 
 export const HEROES_MOCK: IHero[] = [
   {
@@ -237,4 +258,5 @@ export const HEROES_LIST = HEROES_MOCK.map((hero) => ({
     imgFA: `heroes/${hero.key}/img-fa.jpg`,
     imgHero: `heroes/${hero.key}/img-hero.png`,
   },
+  powerStats: HERO_POWER_STATS[hero.key],
 }));
