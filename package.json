@@ -11,7 +11,8 @@
     "lint": "eslint src --ext .ts,.html",
     "lint:fix": "eslint src --ext .ts,.html --fix",
     "format": "prettier --write \"src/**/*.{ts,html,css,scss}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\""
+    "format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\"",
+    "test:ci": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessCI"
   },
   "private": true,
   "dependencies": {
