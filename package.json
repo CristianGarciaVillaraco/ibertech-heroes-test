@@ -11,11 +11,12 @@
     "lint": "eslint src --ext .ts,.html",
     "lint:fix": "eslint src --ext .ts,.html --fix",
     "format": "prettier --write \"src/**/*.{ts,html,css,scss}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\""
+    "format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\"",
+    "test:ci": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessCI"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^20.3.17",
+    "@angular/animations": "~20.3.11",
     "@angular/cdk": "^20.2.12",
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
