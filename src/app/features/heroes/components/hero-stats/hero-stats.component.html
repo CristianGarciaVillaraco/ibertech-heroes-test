@@ -2,8 +2,8 @@
   @if (characters().length > 0) {
     <div class="stat-group">
       <h3 class="section-title">
-        <mat-icon>groups</mat-icon>
-        Personajes asociados
+        <mat-icon>masks</mat-icon>
+        Alter Egos
       </h3>
       <mat-chip-set>
         @for (character of characters(); track character) {
@@ -19,11 +19,55 @@
         <mat-icon>brush</mat-icon>
         Creadores
       </h3>
-      <mat-chip-set>
+      <div class="creator-chips">
         @for (originator of originators(); track originator) {
-          <mat-chip>{{ originator }}</mat-chip>
+          <div
+            class="creator-chip-wrapper"
+            (mouseenter)="onCreatorHover(originator)"
+            (mouseleave)="onCreatorLeave()"
+          >
+            <mat-chip class="creator-chip">{{ originator }}</mat-chip>
+            @if (hoveredCreator() === originator) {
+              <div class="wiki-popover">
+                @if (wikiLoading()) {
+                  <div class="wiki-loading">
+                    <mat-icon>hourglass_empty</mat-icon>
+                    <span>Cargando...</span>
+                  </div>
+                } @else if (wikiError()) {
+                  <div class="wiki-error">
+                    <mat-icon>info_outline</mat-icon>
+                    <span>No encontrado en Wikipedia</span>
+                  </div>
+                } @else if (wikiData()) {
+                  <div class="wiki-content">
+                    @if (wikiData()!.thumbnail) {
+                      <img
+                        [src]="wikiData()!.thumbnail!.source"
+                        [alt]="wikiData()!.title"
+                        class="wiki-thumb"
+                      />
+                    }
+                    <div class="wiki-text">
+                      <p class="wiki-title">{{ wikiData()!.title }}</p>
+                      <p class="wiki-extract">{{ wikiData()!.extract }}</p>
+                      <a
+                        [href]="wikiData()!.content_urls?.desktop?.page"
+                        target="_blank"
+                        rel="noopener"
+                        class="wiki-link"
+                      >
+                        <mat-icon>open_in_new</mat-icon>
+                        Ver en Wikipedia
+                      </a>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
         }
-      </mat-chip-set>
+      </div>
     </div>
   }
 </section>

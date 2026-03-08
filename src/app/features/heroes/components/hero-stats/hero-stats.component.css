@@ -31,3 +31,107 @@ mat-chip-set {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+/* Creator chips with Wikipedia popover */
+.creator-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.creator-chip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.creator-chip {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.wiki-popover {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 100;
+  width: 320px;
+  background: white;
+  border: 1px solid var(--app-border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
+  overflow: hidden;
+  animation: popover-in 0.15s ease;
+}
+
+@keyframes popover-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wiki-loading,
+.wiki-error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: var(--app-text-muted);
+}
+
+.wiki-content {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+}
+
+.wiki-thumb {
+  width: 110px;
+  min-height: 160px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.wiki-text {
+  padding: 0.75rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.wiki-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--app-primary);
+  margin: 0;
+}
+
+.wiki-extract {
+  font-size: 0.8rem;
+  color: var(--app-text-body);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wiki-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--app-primary);
+  text-decoration: none;
+  margin-top: 0.25rem;
+}
+
+.wiki-link mat-icon {
+  font-size: 0.9rem;
+  width: 0.9rem;
+  height: 0.9rem;
+}
