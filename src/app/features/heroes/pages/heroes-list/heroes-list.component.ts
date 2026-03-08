@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { HeroesService } from '../../services/heroes/heroes.service';
 import { CardComponent } from '../../../../shared/ui/card/card.component';
 import { EPublisher } from '../../../../core/models/enums/publisher.enum';
@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IHeroFilters } from '../../../../core/models/interfaces/hero.interface';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-heroes-list',
@@ -35,6 +35,7 @@ import { Router, RouterModule } from '@angular/router';
 export default class HeroesListPageComponent {
   private heroesService = inject(HeroesService);
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   // Signals para filtros
   searchTerm = signal<string>('');
@@ -43,6 +44,33 @@ export default class HeroesListPageComponent {
   alterEgoFilter = signal<string>('');
   originatorFilter = signal<string>('');
   showAdvancedFilters = signal<boolean>(false);
+
+  constructor() {
+    // Inicializar filtros desde la URL
+    const params = this.route.snapshot.queryParams;
+    if (params['search']) this.searchTerm.set(params['search']);
+    if (params['publisher']) this.selectedPublisher.set(params['publisher'] as EPublisher);
+    if (params['name']) this.nameFilter.set(params['name']);
+    if (params['alterEgo']) this.alterEgoFilter.set(params['alterEgo']);
+    if (params['originator']) this.originatorFilter.set(params['originator']);
+    if (params['advanced'] === 'true') this.showAdvancedFilters.set(true);
+
+    // Sincronizar filtros a la URL sin añadir entradas al historial
+    effect(() => {
+      const f = this.filters();
+      this.router.navigate([], {
+        queryParams: {
+          search: f.searchTerm || null,
+          publisher: f.publisher || null,
+          name: f.superhero || null,
+          alterEgo: f.alterEgo || null,
+          originator: f.originator || null,
+          advanced: this.showAdvancedFilters() ? 'true' : null,
+        },
+        replaceUrl: true,
+      });
+    });
+  }
 
   // Publishers disponibles para el filtro
   publishers: EPublisher[] = Object.values(EPublisher);
