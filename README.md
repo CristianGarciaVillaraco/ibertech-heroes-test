@@ -1,6 +1,7 @@
 # Heroes App
 
-[![CI](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci.yml/badge.svg)](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci.yml)
+[![CI develop](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci-develop.yml/badge.svg)](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci-develop.yml)
+[![CI main](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci-main.yml/badge.svg)](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci-main.yml)
 
 A full-featured Angular 20 CRUD application for managing superheroes. Originally written in 2022 as a technical admission test, it has been fully rebuilt to showcase modern Angular patterns, clean architecture, and professional development practices.
 
@@ -13,9 +14,10 @@ A full-featured Angular 20 CRUD application for managing superheroes. Originally
 | Framework | Angular 20 — standalone components, signals, zoneless |
 | UI | Angular Material 20 (M3 theme) |
 | Persistence | Dexie (IndexedDB) |
-| Testing | Jasmine + Karma — 91 tests passing |
+| Unit testing | Jasmine + Karma — 91 tests passing |
+| E2E testing | Playwright — 10 tests passing |
 | Linting | ESLint + Prettier |
-| CI/CD | GitHub Actions — build and test on every PR |
+| CI/CD | GitHub Actions — two pipelines with branch protection |
 
 ---
 
@@ -67,6 +69,19 @@ The app follows a layered architecture: **core** holds domain logic and data acc
 
 ---
 
+## CI/CD
+
+Two separate pipelines enforce quality gates via branch protection:
+
+| Pipeline | Triggers on | Jobs |
+|---|---|---|
+| `ci-develop.yml` | PR → `develop` | Build → Unit tests |
+| `ci-main.yml` | PR → `main` | Build → Unit tests → E2E |
+
+Merging is blocked if any required job fails.
+
+---
+
 ## Getting Started
 
 ```bash
@@ -76,11 +91,14 @@ npm install
 # Run dev server — http://localhost:4200
 npm start
 
-# Run tests
+# Run unit tests
 npm test
 
-# Run tests with coverage report
+# Run unit tests with coverage report
 npm run test:coverage
+
+# Run e2e tests (starts dev server automatically)
+npm run e2e
 
 # Lint
 npm run lint
