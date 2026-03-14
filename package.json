@@ -12,7 +12,9 @@
     "lint:fix": "eslint src --ext .ts,.html --fix",
     "format": "prettier --write \"src/**/*.{ts,html,css,scss}\"",
     "format:check": "prettier --check \"src/**/*.{ts,html,css,scss}\"",
-    "test:ci": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessCI"
+    "test:ci": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessCI",
+    "e2e": "playwright test",
+    "e2e:report": "playwright show-report"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@angular/build": "^20.0.0",
     "@angular/cli": "^20.0.0",
     "@angular/compiler-cli": "^20.0.0",
+    "@playwright/test": "^1.58.2",
     "@types/jasmine": "~5.1.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
