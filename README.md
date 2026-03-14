@@ -1,81 +1,105 @@
 # Heroes App
 
-A simple Angular application for managing heroes. Originally built in 2022 as part of a company admission test, the project has since evolved into a modern learning and demonstration environment for Angular 20, standalone APIs, clean architecture, and updated UI practices.
+[![CI](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci.yml/badge.svg)](https://github.com/CristianGarciaVillaraco/ibertech-heroes-test/actions/workflows/ci.yml)
+
+A full-featured Angular 20 CRUD application for managing superheroes. Originally written in 2022 as a technical admission test, it has been fully rebuilt to showcase modern Angular patterns, clean architecture, and professional development practices.
 
 ---
 
-## 📌 Project Purpose
+## Tech Stack
 
-The main goals of this project are:
-
-- Showcase modern Angular 20 features (standalone components, updated router, signals, etc.)
-- Implement a clean and scalable application structure.
-- Demonstrate CRUD operations using a fictional heroes dataset.
-- Provide a playground for UI, routing, state management, and API integration.
-- Legacy version includes limited test coverage.
-
----
-
-## 🛠 Tech Stack
-
-- Angular 20 (standalone components, Angular Material)
-- TypeScript
-- RxJS
-- Angular Material
-- Node.js (development server)
-- Git & GitHub for version control
-- CSS / SCSS / Tailwind (planned) for styling experiments
+| Layer | Technology |
+|---|---|
+| Framework | Angular 20 — standalone components, signals, zoneless |
+| UI | Angular Material 20 (M3 theme) |
+| Persistence | Dexie (IndexedDB) |
+| Testing | Jasmine + Karma — 91 tests passing |
+| Linting | ESLint + Prettier |
+| CI/CD | GitHub Actions — build and test on every PR |
 
 ---
 
-## 📂 Project Structure
+## Features
 
-For the complete and updated folder organization, please refer to the [Architecture Overview](./doc/architecture-overview.md).
-
-## 🔄 Data Flow
-
-This section describes the data flow based on the current architecture after the refactor.
-
-## 🚀 Usage
-
-For setup instructions and how to run the project, see the **[Setup Guide](./docs/setup-guide.md)**.
-
-## 📚 Features
-
-- Hero listing with filtering.
-- Add new heroes via a form.
-- Delete heroes.
-- Search functionality (implemented as a filter).
-- Data persistence using session storage (to be replaced with a more robust solution in future versions).
-- JSON-based dataset for demo purposes.
+- **Hero list** with real-time filtering by name, alter ego, publisher and creator — filters synced with URL query params
+- **Hero detail** with biography, info cards, power stats radar chart, alter egos, creators with Wikipedia popover, and first appearance
+- **Hero form** with full CRUD — create and edit with sliders for 6 power stats and chip inputs for alter egos and creators
+- **Power stats radar chart** — pure SVG, reactive via Angular signals
+- **Breadcrumb navigation** — contextual and reactive
+- **Scroll restoration** — returns to the exact scroll position when navigating back
+- **Lazy-loaded routes** — heroes and about sections loaded on demand
 
 ---
 
-## 🏷 Legacy Version
+## Architecture
 
-A previous version of this project (from 2022) is preserved in the following branch:
-
-```bash
-legacy/2022-version
+```
+src/app/
+├── core/
+│   ├── db/           # Dexie database setup
+│   ├── models/       # IHero, IPowerStats, EPublisher, HeroModel
+│   ├── services/     # InitDbService (app initializer)
+│   └── mocks/        # Seed data for development
+├── features/
+│   ├── heroes/
+│   │   ├── pages/         # HeroesListPage, HeroDetail, HeroForm
+│   │   ├── components/    # HeroRadarChart, HeroStats, HeroInfoCards, HeroBiography...
+│   │   ├── mappers/       # HeroMapper (domain ↔ view model)
+│   │   ├── pipes/         # AscendingOrder, CleanText
+│   │   └── services/      # HeroesService (Dexie CRUD)
+│   ├── about/
+│   └── init/
+└── shared/
+    └── ui/           # Breadcrumb, Card, Navbar
 ```
 
-This branch contains the original **Angular 13 + Angular Material + SCSS** implementation used in the admission test. It remains available for historical reference.
+The app follows a layered architecture: **core** holds domain logic and data access, **features** are self-contained vertical slices, and **shared** contains truly reusable UI primitives.
 
 ---
 
-## 🔮 Roadmap
+## Key Technical Decisions
 
-- Replace session storage with a more scalable solution (without a custom backend)
-- Improve styling (considering Tailwind CSS as an alternative to SCSS)
-- Complete unit and e2e test coverage
-- Enhance UI/UX with modern Angular Material components
+- **Signals over RxJS** for local component state — simpler reactivity model with less boilerplate
+- **Dexie over localStorage** — structured queries, typed schema, and proper async API for IndexedDB
+- **Pure SVG radar chart** — no charting library dependency, fully reactive via `computed()`
+- **URL-synced filters** — users can share or bookmark filtered views, and navigation preserves filter state
+- **Export default for pages** — enables tree-shaking-friendly lazy loading with `loadComponent`
 
 ---
 
-## 📖 Documentation
+## Getting Started
 
-Additional documentation is available in the `/docs` folder:
+```bash
+# Install dependencies
+npm install
 
-- **architecture-overview.md** → Explains the project’s structure and design decisions
-- **setup-guide.md** → Step-by-step instructions to set up and run the project
-- **changelog.md** → (Optional) Tracks major changes and updates across versions
+# Run dev server — http://localhost:4200
+npm start
+
+# Run tests
+npm test
+
+# Run tests with coverage report
+npm run test:coverage
+
+# Lint
+npm run lint
+```
+
+---
+
+## Routes
+
+| Path | Component |
+|---|---|
+| `/` | Home |
+| `/heroes/list` | Hero list with filters |
+| `/heroes/:id` | Hero detail |
+| `/heroes/new` | Create hero |
+| `/about` | About |
+
+---
+
+## Legacy Version
+
+The original 2022 Angular 13 implementation is preserved in the `legacy/2022-version` branch for comparison.
