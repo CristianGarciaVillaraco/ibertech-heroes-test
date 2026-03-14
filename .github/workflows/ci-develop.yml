@@ -1,10 +1,8 @@
-name: CI
+name: CI — develop
 
 on:
   pull_request:
-    branches: [develop, main]
-  push:
-    branches: [develop, main]
+    branches: [develop]
 
 jobs:
   build:
@@ -43,7 +41,6 @@ jobs:
           cache: 'npm'
 
       - name: Install Chrome
-        id: setup-chrome
         uses: browser-actions/setup-chrome@v1
 
       - name: Install dependencies
