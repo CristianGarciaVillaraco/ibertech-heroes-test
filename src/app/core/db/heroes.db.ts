@@ -9,6 +9,9 @@ export class HeroesDB extends Dexie {
     this.version(1).stores({
       heroes: `++id, superhero, publisher, alterEgo, *originators`,
     });
+    this.version(2).stores({
+      heroes: `id, superhero, publisher, alterEgo, *originators`,
+    });
   }
 }
 
