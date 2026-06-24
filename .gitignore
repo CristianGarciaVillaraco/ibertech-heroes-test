@@ -44,3 +44,9 @@ Thumbs.db
 # Playwright
 playwright-report/
 test-results/
+
+# Claude / AI tooling — local only, never commit
+CLAUDE.md
+.claudeignore
+.claude/
+AGENTS.md

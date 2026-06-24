@@ -1,6 +1,5 @@
 import { EPublisher } from '../models/enums/publisher.enum';
 import { IHero, IPowerStats } from '../models/interfaces/hero.interface';
-import { v4 as uuidv4 } from 'uuid';
 
 const HERO_POWER_STATS: Record<string, IPowerStats> = {
   'dc-batman':            { strength: 35, speed: 27, intelligence: 100, durability: 44, combat: 100, power: 28 },
@@ -23,9 +22,8 @@ const HERO_POWER_STATS: Record<string, IPowerStats> = {
   'marvel-silver-surfer': { strength: 100, speed: 100, intelligence: 88, durability: 100, combat: 80, power: 100 },
 };
 
-export const HEROES_MOCK: IHero[] = [
+export const HEROES_MOCK: Omit<IHero, 'id'>[] = [
   {
-    id: uuidv4(),
     key: 'dc-batman',
     superhero: 'Batman',
     publisher: EPublisher.DC,
@@ -37,7 +35,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un multimillonario empresarial dueño de las empresas Wayne en Gotham City. Decide convertirse en un héroe después de presenciar el trágico asesinato de sus padres.',
   },
   {
-    id: uuidv4(),
     key: 'dc-superman',
     superhero: 'Superman',
     publisher: EPublisher.DC,
@@ -49,7 +46,6 @@ export const HEROES_MOCK: IHero[] = [
       'Nacido en el planeta Krypton es enviado a la tierra después de la destrucción natural del planeta. Fue encontrado y criado por una familia de agricultores estadounidenses.',
   },
   {
-    id: uuidv4(),
     key: 'dc-flash',
     superhero: 'Flash',
     publisher: EPublisher.DC,
@@ -61,7 +57,6 @@ export const HEROES_MOCK: IHero[] = [
       'En un extraño accidente en el laboratorio, adquirió las capacidades de moverse a una velocidad sobrehumana y eligió luchar contra el crimen.',
   },
   {
-    id: uuidv4(),
     key: 'dc-green-lantern',
     superhero: 'Green Lantern',
     publisher: EPublisher.DC,
@@ -82,7 +77,6 @@ export const HEROES_MOCK: IHero[] = [
       'Los green lantern son asignados al considerarlos dignos, por ello se les aporta los objetos de un anillo y una lampara donde provienen sus poderes, principalmente pueden volar y manifestación de objetos acompañados de una luz verde.',
   },
   {
-    id: uuidv4(),
     key: 'dc-green-arrow',
     superhero: 'Green Arrow',
     publisher: EPublisher.DC,
@@ -94,7 +88,6 @@ export const HEROES_MOCK: IHero[] = [
       'Empresario, propietario de las Industrias Queen y una gran celebridad muy conocida en Star City. Sus habilidades con el arco las utiliza para combatir el crimen añadiendo variables de flechas.',
   },
   {
-    id: uuidv4(),
     key: 'dc-wonder-woman',
     superhero: 'Wonder Woman',
     publisher: EPublisher.DC,
@@ -106,7 +99,6 @@ export const HEROES_MOCK: IHero[] = [
       'Princesa guerrera de las amazonas basada en la mitología griega. Sus poderes son habilidades super humanas y de combate de batalla superiores obtenido por los dioses y un amplio entrenamiento. También posee una gran cantidad de armas de las cuales las principales son el lazo de la verdad, los brazales mágicos indestructibles y una tiara.',
   },
   {
-    id: uuidv4(),
     key: 'dc-martian-manhunter',
     superhero: 'Martian Manhunter',
     publisher: EPublisher.DC,
@@ -118,7 +110,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un nativo del planeta de Marte, con habilidades que van más allá de las de un hombre común, incluyendo telepatía y el cambió de forma.',
   },
   {
-    id: uuidv4(),
     key: 'dc-robin',
     superhero: 'Robin/Nightwing',
     publisher: EPublisher.DC,
@@ -130,7 +121,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un niño acróbata callejero de la familia Los Graysons Voladores presencio el asesinato de sus padres en un terrible accidente con el trapecio que saboteo Anthony Zucco (jefe de la mafia). Batman lo encontró mientras investigaba el asesinato y lo entreno tanto física como psicológicamente para ser su asistente.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-spider-man',
     superhero: 'Spider-Man',
     publisher: EPublisher.Marvel,
@@ -142,7 +132,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un joven huérfano de Queens vive con sus tíos, durante su estaba como estudiante es mordido por una araña radiactiva en una exhibición científica adquiere la agilidad y fuerza proporcional de un arácnido. También incrementa sus habilidades atléticas y puede adherirse a superficies. Con sus conocimientos científicos desarrolla el dispara telarañas.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-captain-america',
     superhero: 'Captain America',
     publisher: EPublisher.Marvel,
@@ -154,7 +143,6 @@ export const HEROES_MOCK: IHero[] = [
       'En la segunda guerra mundial Steve era un adolescente cuando quiso alistarse en el ejercito, pero debido a su frágil cuerpo fue rechazado pero el general vio su resolución y decide inscribirlo en el proyecto renacimiento donde, Steve se usa como sujeto de pruebas para la creación de un super soldado. Tras el éxito de dicho proyecto y aumentar sus habilidades se le entrega un uniforme y escudo representado la bandera americana.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-iron-man',
     superhero: 'Iron Man',
     publisher: EPublisher.Marvel,
@@ -166,7 +154,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un joven talentoso en la ingeniería eléctrica pierde a sus padres en un accidente automovilístico y hereda la compañía de su padre (Industrias Stark). Observando los efectos de su tecnología experimental en el esfuerzo bélico estadounidense es herido por una bomba y capturado por Wong-Chu (supervillano). Dicho villano le ordena diseñar un arma, pero Stark con metralla que se dirige al corazón decide crear una placa pectoral magnética para evitar la metralla. Una vez que llega a escapar Stark construye un traje para derrotar a sus villanos. Según como pasa el tiempo empieza a crear distintas armaduras y tecnología revolucionaria.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-thor',
     superhero: 'Thor',
     publisher: EPublisher.Marvel,
@@ -178,7 +165,6 @@ export const HEROES_MOCK: IHero[] = [
       'Hijo de Odín, Thor es enviado a la tierra sin recuerdos de la divinidad y con los recuerdos de un estudiante de medicina, todo esto para enseñarle la humildad. En uno de sus viajes Thor al presenciar una nave espacial se esconde dentro de una cueva donde encuentra el Mjolnir. El Mjolnir al decidir que es digno de sostenerlo le conde los poderes del dios del trueno.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-hulk',
     superhero: 'Hulk',
     publisher: EPublisher.Marvel,
@@ -190,7 +176,6 @@ export const HEROES_MOCK: IHero[] = [
       'Después de una exposición accidental a los rayos gamma durante la detonación de una bomba experimental, un científico llamado Banner se transforma físicamente en Hulk. Hulk posee fuerza sobre natural, en algunos comics tiene también regeneración de las heridas producidas. Actualmente Banner se transforma en Hulk cuando se enfada pero en los primeros comics se transformaba cuando se hacía de noche.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-wolverine',
     superhero: 'Wolverine',
     publisher: EPublisher.Marvel,
@@ -202,7 +187,6 @@ export const HEROES_MOCK: IHero[] = [
       'Sus habilidades viene de una descendencia familiar evolucionada a partir de los lobos (Lupinos). Tras un trágico suceso Jame mata con sus garras a una persona. Mostrar por primera vez las evidencias de sus poderes. Sus poderes son la inmortalidad, y tres garras en cada mano que salen de los nudillos. En un principio sus garras son de huesos pero más adelante tras ser sometido a una prueba científica le insertan Adamantium cubriendo todos los huesos de este material.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-daredevil',
     superhero: 'Daredevil',
     publisher: EPublisher.Marvel,
@@ -214,7 +198,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un joven la Manhatan es educado a la no violencia, en un momento dado un hombre ciego casi es atropellado por un camino en el proceso Matt lo salva, pero en cambio le cae sustancias radioactivas en los ojos dejándolo ciego. Estas sustancias aumentan sus sentidos restantes más allá de los umbrales humanos y ahora puede detectar la forma y la ubicación de los objetos. Tras la muerte de su padre por parte de los hombres de Fixer (Gánster) Matt decide no emplear la fuerza física para vengarse. En cambio, crea su alter ego para realizarlo y aprende artes marciales.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-hawkeye',
     superhero: 'Hawkeye',
     publisher: EPublisher.Marvel,
@@ -226,7 +209,6 @@ export const HEROES_MOCK: IHero[] = [
       'Un joven huérfano se escapa de un orfanato con su hermano para unirse a un carnaval viajero donde aprende a utilizar el arco. Viendo una acción de Iron man decide convertirse en un héroe. Aun que es su primera acción como héroe lo acusaron de robo.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-cyclops',
     superhero: 'Cyclops',
     publisher: EPublisher.Marvel,
@@ -238,7 +220,6 @@ export const HEROES_MOCK: IHero[] = [
       'Scott un joven de nacido en Alaska y su hermano se ven en un terrible accidente del cual secuestraron a sus padres y ellos fueron gravemente heridos, sobre todo Scott que recibió un golpe en la cabeza. Los niños pasaron a un orfanato donde el hijo menor encontró su lugar, pero Scott no. Al tener 17 años Scott se escapa debido a la manifestación de sus poderes mutantes, que lanzaba rallos por los ojos. Debido al golpe en la cabeza no los puede controlar y daña una grúa produciendo un linchamiento hacia su persona por el pueblo, en un momento dado aparece Xavier (director de la escuela de mutantes) y lo matricula en su escuela.',
   },
   {
-    id: uuidv4(),
     key: 'marvel-silver-surfer',
     superhero: 'Silver Surfer',
     publisher: EPublisher.Marvel,
@@ -253,6 +234,7 @@ export const HEROES_MOCK: IHero[] = [
 
 export const HEROES_LIST = HEROES_MOCK.map((hero) => ({
   ...hero,
+  id: hero.key,
   fileManager: {
     imgBg: `heroes/${hero.key}/img-bg.jpg`,
     imgFA: `heroes/${hero.key}/img-fa.jpg`,
